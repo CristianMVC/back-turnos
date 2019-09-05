@@ -1,0 +1,61 @@
+<app-modal [showCloseButton]="false" [closeOnBlur]="true">
+    <div class="app-modal-header">
+        <h4 class="modal-title">Crear campo</h4>
+    </div>
+    <div class="app-modal-body">
+        <form [formGroup]="crearCampoForm" (ngSubmit)="crearCampo()" autocomplete="off">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group-sm has-feedback" [ngClass]="{'has-error': vmLabel.isInvalid()}">
+                        <label for="label"><strong>Nombre *</strong></label>
+                        <input type="text" id="label" class="form-control" formControlName="label" placeholder="Ingresar nombre del campo" [(ngModel)]="field.label">
+                        <app-validation-messages #vmLabel></app-validation-messages>
+                    </div>                
+                    <div class="form-group-sm has-feedback" [ngClass]="{'has-error': vmType.isInvalid()}">
+                        <label for="type"><strong>Componente *</strong></label>
+                        <select class="form-control" formControlName="type" [(ngModel)]="field.type" (change)="onComponentTypeChange()">
+                            <option *ngFor="let ct of componentTypes" [ngValue]="ct">{{ct | formComponentType}}</option>
+                        </select>
+                        <app-validation-messages #vmType></app-validation-messages>
+                    </div>
+                    <div *ngIf="fieldWithType()" class="form-group-sm has-feedback" [ngClass]="{'has-error': vmFieldType.isInvalid()}">
+                        <label for="type"><strong>Tipo *</strong></label>
+                        <select class="form-control" formControlName="fieldType" [(ngModel)]="fieldType" (change)="onFieldTypeChange()">
+                            <option *ngFor="let ft of fieldTypes" [ngValue]="ft">{{ft | formFieldType}}</option>
+                        </select>
+                        <app-validation-messages #vmFieldType></app-validation-messages>
+                    </div>
+                    <div class="form-group-sm" *ngIf="fieldWithOptions()">
+                        <label for="options"><strong>Opciones *</strong></label>
+                        <button type="button" class="btn btn-xs btn-success" (click)="addOption()">Nueva opción</button>
+                    </div>
+
+                    <div class="form-group-sm" *ngIf="fieldWithOptions()">
+                      <label class="custom-file-label" for="opcionesCSV"><strong>Agregar opciones desde archivo CSV</strong></label>
+                      <input type="file" accept=".csv" (change)="readFile($event.target.files)" class="custom-file-input" id="opcionesCSV" aria-describedby="cargarCSV">
+                    </div>
+
+                    <div class="form-group-sm" [class.hidden]="!fieldWithOptions()">
+                        <ng-template #dynamicComponent></ng-template>
+                    </div>
+                    <div *ngIf="optionsMandatory" role="alert" class="form-alert">Debes completar este campo</div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group-sm has-feedback" [ngClass]="{'has-error': vmDescription.isInvalid()}">
+                        <label for="description"><strong>Descripción</strong></label>
+                        <input type="text" id="description" class="form-control" formControlName="description" placeholder="Ingresar descripción del campo" [(ngModel)]="field.description">
+                        <app-validation-messages #vmDescription></app-validation-messages>
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" id="required" formControlName="required" [(ngModel)]="field.required"> Obligatorio</label>
+                    </div>
+                </div>
+            </div>
+            <div class="app-modal-footer col-xs-12 m-t-30">
+                <button type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button>
+                <button type="button" class="btn btn-success" type="submit">Guardar</button>
+            </div>
+        </form>
+    </div>    
+</app-modal>

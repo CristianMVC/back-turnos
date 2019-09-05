@@ -1,0 +1,69 @@
+<div class="panel">
+    <app-alert></app-alert>
+    <h1 class="h2" *ngIf="!editMode">Crear categoría</h1>
+    <h1 class="h2" *ngIf="editMode">Editar categoría</h1>
+
+    <form [formGroup]="agregarCategoriaForm" (ngSubmit)="onSubmit(capadidadRef)" autocomplete="off">
+        <div class="form-group has-feedback" [ngClass]="{'has-error': vmNombre.isInvalid()}">
+            <label for="nombre">
+                <strong>Nombre del categoría *</strong>
+            </label>
+            <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Ingresar nombre de la categoría"
+                [(ngModel)]="categoria.nombre">
+            <app-validation-messages #vmNombre></app-validation-messages>
+        </div>
+        <small class="aclaracion">(*) Campos obligatorios</small>
+        <br>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Trámites agregados a la categoría *</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tramite of tramitesSeleccionados">
+                    <td>{{ tramite.nombre }}</td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm pull-right" (click)="onRemoveClicked(tramite)">Quitar</button>
+                    </td>
+                </tr>
+                <tr [ngClass]="{'hidden': !vmTramites.isInvalid() }">
+                    <td>
+                        <input type="number" class="hidden" id="tramites" formControlName="tramites" [ngModel]="tramitesSeleccionados.length">
+                        <app-validation-messages #vmTramites></app-validation-messages>
+                    </td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Trámites disponibles</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tramite of tramitesDisponibles">
+                    <td>{{ tramite.nombre }}</td>
+                    <td>
+                        <button type="button" class="btn btn-primary btn-sm pull-right" (click)="onAddClicked(tramite)">Agregar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="buttons-content">
+            <button class="btn btn-link" type="button" (click)="salir()">
+                Cancelar
+            </button>
+            <button class="btn btn-success" type="submit">
+                <span *ngIf="!editMode">Crear</span>
+                <span *ngIf="editMode">Guardar</span>
+            </button>
+        </div>
+    </form>
+
+</div>

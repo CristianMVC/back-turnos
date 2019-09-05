@@ -1,0 +1,29 @@
+<div [formGroup]="form" class="form-group has-feedback" [ngClass]="{'has-error': isInvalid}">
+    <label [attr.for]="field.key"><strong>{{field.label}}<span *ngIf="field.required"> *</span></strong></label>
+    <label *ngIf="field.description" class="description"><small>{{field.description}}</small></label>
+    <div [ngSwitch]="field.type" >
+        <input *ngSwitchCase="'textbox'" [formControlName]="field.key" [id]="field.key" [type]="field.formComponent.typeValue" class="form-control"
+        placeholder="Escribí tu {{field.label}}" (keypress)="onKey($event, field.label)">
+
+        <input *ngSwitchCase="'date'" [formControlName]="field.key" [id]="field.key" [type]="field.type"  class="form-control" >
+        
+        <select *ngSwitchCase="'dropdown'" [formControlName]="field.key" [id]="field.key" class="form-control" required>
+            <option value="" disabled selected>Seleccione {{ field.label }}</option>
+            <option *ngFor="let opt of field.formComponent.options" [value]="opt.key">{{opt.value}}</option>
+        </select>
+        <textarea *ngSwitchCase="'textarea'" [formControlName]="field.key" [attr.rows]=" 3 " [id]="field.key"
+        class="form-control" placeholder="Escribí tus {{field.label}}"></textarea>
+        <div  *ngSwitchCase="'radio'">
+            <div role="radiogroup" aria-label="recordatorio">
+                <div class="radio" *ngFor="let opt of field.formComponent.options">
+                    <label>
+                        <input type="radio" [formControlName]="field.key" [id]="field.key" [value]="opt.key"> {{opt.value}}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <span *ngIf="isInvalid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+    </div>
+    <div *ngIf="isRequired" role="alert" class="form-alert">Debes completar este campo.</div>
+    <div *ngIf="badPattern" role="alert" class="form-alert">El valor ingresado no es válido.</div>
+</div>

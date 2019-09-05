@@ -1,0 +1,110 @@
+<div class="panel">
+        <div class="panel">
+                <h2>Trámite: {{tramitepda.tramite}}</h2>
+            </div>
+    <app-alert></app-alert>
+    <h1 class="h2" *ngIf="!editMode">Editar tramite para el punto de Atención</h1>
+
+    <form [formGroup]="editarTramitePdaForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group has-feedback">
+                    <label for="multiple"><strong>Multiples Turnos por Cuil</strong></label>
+                    <app-switch name="multiple"
+                        [(model)]="tramitepda.multiple" 
+                        [required]="false">
+                    </app-switch>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="tramitepda.multiple">
+                <div class="form-group has-feedback has-feedback-number" >
+                    <label for="duracion"><strong>Máximo número de turnos</strong></label>
+                    <input max="20" min="1" type="number" id="multiple_max" class="form-control" formControlName="multiple_max" placeholder="0" [(ngModel)]="tramitepda.multiple_max">
+                    
+                </div>                
+            </div>
+            <div class="col-md-4" *ngIf="tramitepda.multiple">
+                <div class="form-group has-feedback has-feedback-number" >
+                    <label for="duracion"><strong> Horizonte (Intervalo en días)</strong></label>
+                    <input maxlength="3" size="3" max="360" min="1" type="number" id="multiple_horizonte" class="form-control" formControlName="multiple_horizonte" placeholder="0" [(ngModel)]="tramitepda.multiple_horizonte">
+                </div>                
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group has-feedback">
+                    <label for="permite_otro"><strong> Permite sacar turno a Otro Usuario</strong></label>
+                    <app-switch name="permite_otro"
+                        [(model)]="tramitepda.permite_otro" 
+                        [required]="false">
+                    </app-switch>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="tramitepda.permite_otro">
+                <div class="form-group has-feedback has-feedback-number" >
+                    <label for="permite_otro_cantidad"><strong>Cantidad de turnos por Cuil</strong></label>
+                    <input max="20" min="1" type="number" id="permite_otro_cantidad" class="form-control" formControlName="permite_otro_cantidad" placeholder="0" [(ngModel)]="tramitepda.permite_otro_cantidad">
+                    
+                </div>                
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group has-feedback">
+                    <label for="permite_prioridad"><strong> Permite prioridad (TOD)</strong></label>
+                    <app-switch name="permite_prioridad"
+                        [(model)]="tramitepda.permite_prioridad" 
+                        [required]="false">
+                    </app-switch>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="form-group has-feedback">
+                    <label for="deshabilitar_hoy"><strong> Deshabilitar día de hoy</strong></label>
+                    <app-switch name="deshabilitar_hoy"
+                        [(model)]="tramitepda.deshabilitar_hoy" 
+                        [required]="false">
+                    </app-switch>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group has-feedback">
+                    <label for="multiturno"><strong> Permite Multiturno (Mi Argentina)</strong></label>
+                    <app-switch name="multiturno"
+                        [(model)]="tramitepda.multiturno" 
+                        [required]="false">
+                    </app-switch>
+                </div>
+            </div>
+            <div class="col-md-4" *ngIf="tramitepda.multiturno">
+                <div class="form-group has-feedback has-feedback-number" >
+                    <label for="multiturno_cantidad"><strong>Cantidad máxima de personas por turno</strong></label>
+                    <input max="20" min="1" type="number" id="multiturno_cantidad" class="form-control" formControlName="multiturno_cantidad" placeholder="0" [(ngModel)]="tramitepda.multiturno_cantidad">
+                    
+                </div>                
+            </div>
+            
+        </div>
+        <br>
+
+        <small class="aclaracion">(*) Campos obligatorios</small>
+        <br>
+        
+
+        <div class="buttons-content">
+            <button class="btn btn-link" type="button" (click)="salir()">
+                Cancelar
+            </button>
+            <button class="btn btn-success" type="submit">
+                <span >Guardar</span>
+            </button>
+        </div>
+    </form>
+
+</div>

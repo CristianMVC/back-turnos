@@ -1,0 +1,29 @@
+<div class="panel">
+    <app-alert></app-alert>
+    <div class="panel-header">
+            <h2>Calendario del Trámite: {{tramitepda.tramite}}
+          </h2>
+    </div>
+    <div class="row">
+        <div class="col-md-6">  
+            <div class="form-group">    
+                <div class="input-group">
+                    <input class="form-control" appSntDatePicker [options]="datepickerOptions" (onChange)="dateChange($event)" />
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>  
+            <button type="button" class="btn btn-warning" [disabled]="!isDateSelected()" (click)="deshabilitarDia()">Deshabilitar día</button>
+        </div>
+        <div class="col-md-6">
+            <div class="lista-deshabilitados">
+                <h3>Próximos días deshabilitados del Tramite</h3>
+                <app-lista-feriados [feriados]="proximosFeriados" [idPuntoAtencion]="idPuntoAtencion" [idTramite]="idTramite" (habilitarDiaEvent)="habilitarDia()"></app-lista-feriados>
+            </div>
+        </div>
+    </div>
+    <app-modal-reasignar-turnos-tramite #modalReasignar
+        (turnoCanceladoEvent)="turnoCancelado($event)" (turnosReasignadosEvent)="turnosReasignados($event)">
+    </app-modal-reasignar-turnos-tramite>
+</div>

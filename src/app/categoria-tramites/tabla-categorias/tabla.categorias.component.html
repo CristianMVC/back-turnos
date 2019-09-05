@@ -1,0 +1,50 @@
+<app-alert></app-alert>
+<div class="panel-header">
+    <h2> Categorías de trámites </h2>
+    <button type="button" class="btn btn-sm btn-success pull-right" (click)="mostrarCrearCategoria()">
+        <i class="fa fa-plus"></i> crear categoría
+    </button>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nombre de la categoría</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let categoria of categoriasPaginables.categorias">
+        <td>{{ categoria.id }}</td>
+        <td *ngIf="modificar == categoria.id" ><input type="text" placeholder='{{ categoria.nombre}}'  name="nombre" [(ngModel)]="input.categoria" class="form-control" style="height: 30%; width: 70%"></td>
+        <td *ngIf="modificar != categoria.id" >{{ categoria.nombre}}</td>
+        <td class="acciones">
+            <div class="btn-group ">
+                <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Acciones <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngIf="modificar != categoria.id" ><a   (click)="editar(categoria)" [routerLink]="">Editar</a></li>
+                    <li *ngIf="modificar == categoria.id" ><a   (click)="modificarCategoria(categoria)" [routerLink]="">Guardar</a></li>
+                    <li><a   class="" (click)="modalEliminar(categoria)" [routerLink]="">Eliminar</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="text-center">
+<app-pagination [itemsSize]="categoriasPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+</div>
+<hr />
+<div *ngIf="crear">
+    <form role="form"  (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Nombre de la categoria:</label>
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="input.nueva">
+        </div>
+        <button type="submit" class="btn btn-default">Crear</button>
+    </form>
+</div>

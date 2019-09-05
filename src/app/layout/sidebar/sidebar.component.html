@@ -1,0 +1,27 @@
+<aside class="col-md-3">
+    <div class="sidebar"  >
+        <div class="sidebar-header">
+            <h5>Organismos</h5>
+            <button *appAuthRol="'organismos'" type="button" class="btn btn-success btn-sm sidebar-header-button"
+                (click)="goToCrearOrganismo()"><i class="fa fa-plus"></i> Crear</button>
+        </div>
+        <div class="sidebar-menu">
+            <ul class="nav">
+                <li *ngFor="let organismoArea of organismosArea">
+                    <a *ngIf="hasAccessToOrganismos()" data-toggle="collapse" href="#{{organismoArea.id}}"
+                     (click)="displayAreasAndNavigate(organismoArea.id)" class="desplegable">{{organismoArea.nombre}}</a>
+                    <a *ngIf="!hasAccessToOrganismos()" class="desplegable sidebar-disabled">{{organismoArea.nombre}}</a>
+                    <div id="{{organismoArea.id}}" class="panel-collapse collapse disabled" [ngClass]="{'in': !isAdmin() }">
+                        <p>Áreas</p>
+                        <ul>
+                            <li *ngFor="let area of organismoArea.areas" class="list-item">
+                                <a *ngIf="hasAccesToArea()" href='javascript:void(0);' (click)="goToAreaTab(organismoArea.id, area.id)">{{area.nombre}}</a>
+                                <a class="sidebar-disabled" *ngIf="!hasAccesToArea()">{{area.nombre}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</aside>

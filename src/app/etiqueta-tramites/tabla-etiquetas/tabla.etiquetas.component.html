@@ -1,0 +1,50 @@
+<app-alert></app-alert>
+<div class="panel-header">
+    <h2> Etiqueta trámites </h2>
+    <button type="button" class="btn btn-sm btn-success pull-right" (click)="mostrarCrearEtiqueta()">
+        <i class="fa fa-plus"></i> crear etiquetas
+    </button>
+</div>
+
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nombre de la etiqueta</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let etiqueta of etiquetas.etiquetas">
+        <td>{{ etiqueta.id }}</td>
+        <td *ngIf="modificar == etiqueta.id" ><input type="text"  placeholder='{{ etiqueta.nombre}}'  name="nombre" [(ngModel)]="input.nombre" class="form-control" style="height: 30%; width: 70%"></td>
+        <td *ngIf="modificar != etiqueta.id" >{{etiqueta.nombre}}</td>
+        <td class="acciones">
+            <div class="btn-group ">
+                <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Acciones <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li *ngIf="modificar != etiqueta.id" ><a   (click)="editar(etiqueta)" [routerLink]="">Editar</a></li>
+                    <li *ngIf="modificar == etiqueta.id" ><a   (click)="modificarEtiqueta(etiqueta)" [routerLink]="">Guardar</a></li>
+                    <li><a   class="" (click)="modalEliminar(etiqueta)" [routerLink]="">Eliminar</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<div class="text-center">
+    <app-pagination [itemsSize]="etiquetas.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+</div>
+<hr />
+<div *ngIf="crear">
+    <form role="form"  (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label>Nombre de la etiqueta:</label>
+            <input type="text" class="form-control" name="nombre" [(ngModel)]="input.nueva">
+        </div>
+        <button type="submit" class="btn btn-default">Crear</button>
+    </form>
+</div>

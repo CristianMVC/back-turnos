@@ -1,0 +1,13 @@
+hr {
+    border: 1px solid #ccc;
+}
+
+table.capacidad {
+    .form-control {
+        height: auto;
+        width: 60px;
+    }
+    .ng-invalid.ng-touched {
+        border: 1px solid red;
+    }
+}

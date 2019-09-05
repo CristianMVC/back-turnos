@@ -1,0 +1,15 @@
+<app-modal [showCloseButton]="false" [closeOnBlur]="true">
+    <div class="app-modal-header">
+        <h4 class="modal-title">Eliminar rango de horarios</h4>
+    </div>
+    <div class="app-modal-body">
+        <p>¿Estás seguro de eliminar el rango horario:
+            <span *ngIf="rango">{{ rango.idRow }}?</span>
+        </p>
+        <p class="descripcion"><strong>Importante:</strong> la edición de un rango horario impacta en la capacidad por grupo de trámites</p>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-default" (click)="cancelar()">Salir</button>
+        <button type="button" class="btn btn-danger" (click)="eliminar()">Eliminar rango horario</button>
+    </div>
+</app-modal>

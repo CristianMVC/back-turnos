@@ -1,0 +1,35 @@
+<app-modal [showCloseButton]="false" [closeOnBlur]="false" [large]="true">
+    <div class="app-modal-header">
+        <h4 class="modal-title">Deshabilitar día</h4>
+    </div>
+    <div class="app-modal-body">
+  
+      <div class="panel" [class.hidden]="confirmed">
+        <p> Existen turnos en la fecha seleccionada:
+            <strong *ngIf="fecha">{{ fecha }} </strong>
+        </p>
+        <p> ¿Desea continuar con la reasignación de estos turnos? </p>
+      </div>
+
+      <div [class.hidden]="!confirmed">
+        <app-reasignar-turnos *ngIf="formattedDate" [fecha]="formattedDate" [idPuntoAtencion]="idPuntoAtencion"
+          (turnosReasignadosEvent)="turnosReasignados($event)"></app-reasignar-turnos>
+      </div>
+
+    </div>
+
+    <div class="app-modal-footer">
+      <div [class.hidden]="confirmed">
+        <button type="button" class="btn btn-default" (click)="salirSinConfirmar()">Salir</button>
+        <button type="button" class="btn btn-success" (click)="continuar()">Continuar</button>
+      </div>
+
+      <div [class.hidden]="!confirmed">
+        <button type="button" class="btn btn-default" (click)="salir()">Salir</button>
+        <button type="button" class="btn btn-success" (click)="reasignarTurnos()">
+            Finalizar Reasignación
+        </button>
+      </div>
+    </div>    
+    
+</app-modal>

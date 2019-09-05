@@ -1,0 +1,19 @@
+.jumbotron-img-portada {
+    background-image: url(/assets/images/argentina_2_0.jpg);
+}
+
+.jumbotron-img-tramite {
+    background-image: url(/assets/images/argentina_2_0.jpg);
+}
+
+.jumbotron .jumbotron_body {
+    padding: 40px 0;
+    h2 {
+    	word-break: break-word;
+    }
+    @media (max-width: 768px) {
+        h2 {
+    		font-size: 30px;
+    	}
+    }
+}

@@ -1,0 +1,14 @@
+<app-header *ngIf='isReady'></app-header>
+
+<main role="main">
+    <div class="container">
+        <app-sidebar *ngIf='isReady'></app-sidebar>
+        <app-loader></app-loader>
+        <div class="col-md-9">
+            <app-expiration></app-expiration>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</main>
+
+<app-footer></app-footer>

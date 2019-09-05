@@ -1,0 +1,46 @@
+<div class="panel-header">
+    <h2>Trámites del punto de Atención</h2>
+</div>
+<app-alert></app-alert>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th></th>
+            <th>Nombre</th>
+            <th>Publicado</th>
+            <th>Visibilidad en el Punto de Atención</th>
+            <th>Acciones en el Punto de Atención</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tramite of tramitesPaginables.tramites">
+            <td>{{ tramite.id }}</td>
+            <th scope="row"></th>
+            <td>{{ tramite.nombre }}</td>
+            <td>{{ tramite.visibilidad ? 'SI' : 'NO' }}</td>
+            <td>
+                <app-toggle
+                    [(model)]="tramite.visibilidad && tramite.estado"
+                    (modelChange)="onEstadoChange($event, tramite.id)"
+                    [onText]="'Visible'"
+                    [offText]="'Oculto'"
+                    [disabled]="!tramite.visibilidad">
+                </app-toggle>
+            </td>
+            <td>
+                <div class="btn-group ">
+                    <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Acciones<span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                      <li  *ngIf="tramite.estado  && tramite.grupo_tramite_id > 0" ><a   (click)="sacarTurno(tramite)" [routerLink]="" >Sacar Turno</a></li>
+                      <li ><a  (click)="editar(tramite)" [routerLink]="">Editar</a></li>
+                      <li ><a  (click)="deshabilitar(tramite)" [routerLink]="">Deshabilitar Días</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<div class="text-center">
+    <app-pagination [itemsSize]="tramitesPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+</div>

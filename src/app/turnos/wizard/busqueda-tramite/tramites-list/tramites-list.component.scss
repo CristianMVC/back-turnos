@@ -1,0 +1,43 @@
+.panel-body__organismo {
+	color: #767676;
+	font-size: 1em;
+    font-weight: 300;
+}
+.tramites-list {
+	margin-top: 30px;
+	min-height: 45vh;
+}
+.panels-row {
+	button.panel {
+		transition: background 0.15s;
+		text-align: left;
+	}
+	button.panel:hover, button.panel:focus {
+	    background: #0695d6;
+	    color: #fff;
+	    cursor: pointer;
+	    small {
+	    	color: #fff;
+	    }
+	}	
+}
+
+.panels-row, .panels-row>div {
+	display: flex!important;
+}
+
+/* -------------------------- PANELES ----------------------- */
+
+.panels-row {
+  display: flex;
+  flex-wrap: wrap; // Comentado porque trae problemas en Safari
+  flex-direction: row;
+
+  > div {
+    display: flex;
+
+    .panel {
+      width: 100%;
+    }
+  }
+}

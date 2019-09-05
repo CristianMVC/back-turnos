@@ -1,0 +1,29 @@
+<app-alert></app-alert>
+<div class="section-title">
+    <h1 class="h3">Calendario</h1>
+</div>
+<div class="panel">
+    <div class="panel-header">
+        <h2>Feriados Nacionales</h2>
+    </div>
+    <p>Los días que se marquen como feriados afectarán a todos los puntos de atención</p>
+    <div class="row">
+        <div class="col-md-6">        
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" appSntDatePicker [options]="datepickerOptions" (onChange)="dateChange($event)"/>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" [disabled]="!isDateSelected() || isTodaySelected()" (click)="setFeriadoNacional()">Marcar como feriado nacional</button>
+        </div>
+        <div class="col-md-6">
+            <div class="lista-feriados">
+                <h3>Próximos feriados</h3>
+                <app-lista-feriados [feriados]="proximosFeriados" [idPuntoAtencion]="" (habilitarDiaEvent)="habilitarDia()"></app-lista-feriados>
+            </div>
+        </div>
+    </div>
+</div>

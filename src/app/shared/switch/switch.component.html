@@ -1,0 +1,20 @@
+<div class="switch-container">
+ <div class="btn-group" role="group" aria-label="">
+    <button type="button" class="btn btn-sm"
+        [ngClass]="{ 'btn-primary': switchValue == 1 }"
+        [disabled]="disabled"
+        (click)="yesBtnClick()"> SI </button>
+    <button type="button" class="btn btn-sm"
+        [ngClass]="{ 'btn-primary': switchValue == 0 }"
+        [disabled]="disabled"   
+        (click)="noBtnClick()"> NO </button>
+ </div>
+ <div>
+    <input class="hidden" type="number" 
+        [required]="required" name="{{name}}" id="{{name}}" [ngModel]="switchValue">
+    <div *ngIf="isInvalid()">
+        <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+        <div role="alert" class="form-alert">Debes completar este campo</div>
+    </div>
+ </div>
+</div>

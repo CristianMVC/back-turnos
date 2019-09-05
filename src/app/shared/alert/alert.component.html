@@ -1,0 +1,14 @@
+<div *ngFor="let alert of alerts">
+    <div class="alert alert-{{alert.type}}" [ngClass]="{'alert-dismissible': alert.dismissible}">
+        <div class="media">
+            <div *ngIf="alert.icon" class="media-left">
+                <i class="fa fa-{{alert.icon}} fa-fw fa-2x"></i> 
+            </div>
+            <div class="media-body">
+                <h4 *ngIf="alert.header">{{alert.header}}</h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Cerrar" (click)="dismissAlert(alert)"><span aria-hidden="true">&times;</span></button>
+                <p class="margin-0">{{alert.message}}</p>
+            </div>
+        </div>
+    </div>
+</div>

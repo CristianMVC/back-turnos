@@ -1,0 +1,61 @@
+<app-alert></app-alert>
+<div class="panel-header">
+    <h2>Administrar trámites</h2>
+    <button *appAuthRol="'tramites'" type="button" class="btn btn-sm btn-success pull-right" (click)="crearTramite()"><i class="fa fa-plus"></i> Crear trámite</button>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Estado</th>
+            <th>Duración</th>
+            <th  *appAuthRol="'tramites'" >Categoría</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tramite of tramitesPaginables.tramites">
+            <td>{{ tramite.id }}</td>
+            <td>{{ tramite.nombre }}</td>
+            <td>{{ tramite.estado }}</td>
+            <td>{{ tramite.duracion }} minutos</td>
+            <td *appAuthRol="'tramites'" >
+                <select style="border-radius: 8px; background-color:transparent" name="categorias"  (change)="modify($event.target.value, tramite.id)">
+
+                    <option    value="" selected disabled hidden>Sin categoría</option>
+                    <ng-container   *ngFor="let cat of categoriasPaginables.categorias" >
+                        <ng-container *ngFor="let tram of cat.tramites">
+                            <ng-container *ngIf="tram?.length > 0 ">
+                                <ng-container *ngFor="let t of tram">
+                                    <option *ngIf="tramite.id == t.id " [value]="cat.id" selected disabled hidden>  {{cat.nombre}} </option>
+                                </ng-container>
+                            </ng-container>
+                            <option  [value]="cat.id"> {{cat.nombre}} </option>
+                        </ng-container>
+                    </ng-container>
+
+                </select>
+            </td>
+            <td class="acciones">
+                    <div *appAuthRol="'tramites'" class="btn-group ">
+                            <button type="button" class="btn btn-primary dropdown-toggle btn-sm" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Acciones <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                              <li *ngIf="tramite.punto_atencion_id > 0 && tramite.grupo_tramite_id > 0"><a *appAuthRol="'tramites'"    (click)="sacarTurno(tramite)" [routerLink]="" >Sacar Turno</a></li>
+                              <li *ngIf="!tramite.org" ><a  *appAuthRol="'tramites'"  (click)="editarTramite(tramite)" [routerLink]="">Editar</a></li>
+                              <li><a *appAuthRol="'tramites'"  class="" (click)="modalEliminar.show(tramite)" [routerLink]="">Eliminar</a></li>
+                            </ul>
+                    </div>
+                    <ng-container *appAuthRol="'aux'" >
+                      <a   class="btn btn-primary btn-sm"  *ngIf="tramite.punto_atencion_id > 0 && tramite.grupo_tramite_id > 0"    (click)="sacarTurno(tramite)" [routerLink]="" >Sacar Turno</a>
+                    </ng-container>                
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-modal-eliminar-tramite  #modalEliminar  (tramiteRemovedEvent)="tramiteRemoved($event)"></app-modal-eliminar-tramite>
+<div class="text-center">
+    <app-pagination [itemsSize]="tramitesPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+</div>

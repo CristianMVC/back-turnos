@@ -1,0 +1,19 @@
+ul, li {
+  padding-left: 0!important;
+  margin-left: 0!important;
+  list-style-type: none!important;
+}
+li {
+	margin-bottom: 10px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 5px;
+}
+button {
+	margin-bottom: 0; 
+}
+
+.feriado-dia {
+  /*width: calc(100% - 80px);*/
+  display: inline-block;
+  font-size: 15px;
+}

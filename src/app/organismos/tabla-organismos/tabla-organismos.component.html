@@ -1,0 +1,31 @@
+<app-alert></app-alert>
+<div class="panel-header">
+    <h2>Administrar organismos</h2>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Organismo</th>
+            <th>Abreviatura</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let organismo of organismosPaginables.organismos">
+            <td>{{ organismo.id }}</td>
+            <td><a (click)="verOrganismo(organismo.id)">{{ organismo.nombre }}</a></td>
+            <td>{{ organismo.abreviatura }}</td>
+            <td class="acciones">
+                <button *appAuthRol="'organismos'" type="button" class="btn btn-primary btn-sm" (click)="editarOrganismo(organismo)">editar</button>
+                <button *appAuthRol="'organismos'" type="button" class="btn btn-danger btn-sm" (click)="modalEliminar.show(organismo)">eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-modal-eliminar-organismo #modalEliminar 
+    (organismoRemovedEvent)="organismoRemoved($event)">
+</app-modal-eliminar-organismo>
+<div class="text-center">
+    <app-pagination [itemsSize]="organismosPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+</div>

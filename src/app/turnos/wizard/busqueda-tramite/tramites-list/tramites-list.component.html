@@ -1,0 +1,37 @@
+<div class="container">
+  <div *ngIf="hasResults(); then searchWithResults; else searchWithoutResults"></div>
+  <div class="col-md-8 col-md-offset-2">
+    <ng-template #searchWithResults>
+      <ul style="padding:0;" class="search-results apachesolr_search-results">
+        <div class="row panels-row">
+          <div *ngFor="let tramite of tramitesPaginables.tramites" class="panel-block col-xs-12 col-sm-6 col-md-4">
+            <button class="panel panel-default" (click)="selectTramite(tramite)">
+              <div class="panel-body">
+                <h2 class="h3">{{ tramite.nombre }}</h2>
+                <small class="panel-body__organismo">{{ tramite.area }}</small>
+              </div>
+            </button>
+          </div>
+        </div>
+      </ul>
+      <div class="text-center">
+        <app-pagination [itemsSize]="tramitesPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+      </div>
+    </ng-template>
+    <ng-template #searchWithoutResults>
+      <div class="col-md-8 col-md-offset-2">
+        <div id="alerta" class="alert alert-warning no-result" style="display: block;">
+          <div class="media">
+            <div class="media-left media-middle">
+              <i class="fa fa-warning fa-fw fa-2x"></i>
+            </div>
+            <div class="media-body">
+              <p>No hay resultados para mostrar</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>
+

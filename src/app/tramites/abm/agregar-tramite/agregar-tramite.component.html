@@ -1,0 +1,209 @@
+<div class="panel">
+    <app-alert></app-alert>
+    <div class="panel-header">
+        <h3 *ngIf="!editMode">Nuevo trámite</h3>
+        <h3 *ngIf="editMode">Editar trámite</h3>
+        <hr>
+    </div> 
+
+    <form [formGroup]="agregarTramiteForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group has-feedback" [ngClass]="{'has-error': vmNombre.isInvalid()}">
+                    <label for="nombre"><strong>Nombre *</strong></label>
+                    <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Ingresar nombre del trámite" [(ngModel)]="tramite.nombre">
+                    <app-validation-messages #vmNombre></app-validation-messages>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-feedback has-feedback-number" [ngClass]="{'has-error': vmDuracion.isInvalid()}">
+                    <label for="duracion"><strong>Duración del trámite (en minutos) *</strong></label>
+                    <input type="number" id="duracion" class="form-control" formControlName="duracion" placeholder="0" [(ngModel)]="tramite.duracion">
+                    <app-validation-messages #vmDuracion></app-validation-messages>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group has-feedback">
+                    <label for="visibilidad"><strong>Publicado *</strong></label>
+                    <app-switch name="visibilidad"
+                        [(model)]="tramite.visibilidad"
+                        [required]="true">
+                    </app-switch>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-feedback">
+                    <label for="excepcional"><strong>Trámite excepcional *</strong></label>
+                    <app-switch name="excepcional"
+                        [disabled]="disableExcepcional"
+                        [(model)]="tramite.excepcional"
+                        [required]="true">
+                    </app-switch> 
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group has-feedback">
+                    <label for="miArgentina"><strong>Mi Argentina *</strong></label>
+                    <app-switch name="visibilidad"
+                                [(model)]="tramite.miArgentina"
+                                [required]="true">
+                    </app-switch>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group has-feedback" [ngClass]="{'has-error': vmDescripcion.isInvalid()}">
+                    <label for="descripcion"><strong>Descripción </strong></label>
+                    <input maxlength="140" type="text" id="descripcion" class="form-control" formControlName="descripcion" placeholder="Ingresar descripcion del trámite" [(ngModel)]="tramite.descripcion">
+                    <app-validation-messages #vmDescripcion></app-validation-messages>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group has-feedback">
+                    <label for="reserva"><strong>Requisitos y documentación obligatoria a presentar (Diferencie cada uno mediante el uso de la tecla Enter)</strong></label>
+                    <textarea rows="4" id="requisitos" class="form-control" formControlName="requisitosAsString" placeholder="Ingresar los requisitos del trámite"
+                        [(ngModel)]="tramite.requisitosAsString"></textarea>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="panel-header">
+                    <h3>Formulario del trámite</h3>
+                    <hr>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for=""><strong>Campos agregados al formulario del trámite</strong></label>
+                <div class="table-content">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th class="text-center">Orden</th>
+                                <th>Campo</th>
+                                <th>Tipo de campo</th>
+                                <th class="text-center">Obligatorio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let seleccionado of camposSeleccionados; let i = index">
+                                <th class="text-center" scope="row"><input type="checkbox" (change)="checkCampoSeleccionado($event, seleccionado, i)"></th>
+                                <td class="text-center">{{i+1}}</td>
+                                <td class="text-capitalize">{{ showLabel(seleccionado) }}</td>
+                                <td class="text-capitalize">{{ seleccionado.type | formComponentType }}</td>
+                                <td class="text-center"><input type="checkbox" [(ngModel)]="seleccionado.required" [ngModelOptions]="{standalone: true}" [disabled]="seleccionado.inicial"
+                                    /></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="table-footer">
+                    <div class="pull-left">
+                        <button class="btn btn-xs btn-primary" (click)="quitarDelFormulario()" [disabled]="disableRemoveOptions()"><span>Quitar del formulario</span></button>
+                    </div>
+                    <div class="pull-right">
+                        <label>Ordenar</label>
+                        <button type="button" class="btn btn-xs btn-default" (click)="moveDown()" [disabled]="disableMoveDownOption()"><i class="fa fa-chevron-down"></i></button>
+                        <button type="button" class="btn btn-xs btn-default" (click)="moveUp()" [disabled]="disableMoveUpOption()"><i class="fa fa-chevron-up"></i></button>
+                        <button type="button" class="btn btn-xs btn-success" (click)="modalCrearCampo.show()"><span><i class="fa fa-plus"></i> Crear campo</span></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <label for=""><strong>Campos disponibles para agregar</strong></label>
+                <div *ngIf="hayCamposDisponibles()">
+                    <div class="table-content">
+                        <table class="table table-striped campos-disponibles">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>Nombre</th>
+                                    <th>Tipo de campo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let disponible of camposDisponibles">
+                                    <th class="text-center" scope="row"><input type="checkbox" (change)="checkCampoDisponible($event, disponible)"></th>
+                                    <td class="text-capitalize">{{disponible.label}}</td>
+                                    <td class="text-capitalize">{{disponible.type | formComponentType}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="table-footer">
+                        <div class="pull-left">
+                            <button class="btn btn-xs btn-primary" (click)="agregarAlFormulario()" [disabled]="disableAddOptions()"><span>Agregar al formulario</span></button>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="!hayCamposDisponibles()">
+                    <span>No hay campos disponibles.</span>
+                </div>
+            </div>
+
+            <app-modal-crear-campo #modalCrearCampo (tramiteFieldCreatedEvent)="tramiteFieldCreated($event)" class="modal-lg"></app-modal-crear-campo>
+
+            <div class="col-md-12">
+
+
+
+                <div *ngIf="org">
+
+            <div *ngIf="areasPaginables">
+            <strong>Asignar areas</strong><br><br>
+            <div class="table-content">
+                <table class="table table-striped campos-disponibles">
+
+                    <tbody>
+                    <tr *ngFor="let area of areasPaginables.areas">
+                            <th class="text-capitalize"  scope="row"><input class="form-check-input" type="checkbox" name={{area.id}}  [checked]="checkAreaTramite(area.id)"  (change)="agregarAreas($event, area.id)"></th>
+                        <td class="text-capitalize">{{area.nombre}}</td>
+
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            </div>
+                    <div *ngIf="errorTramite">
+                        <h4 class="alert alert-danger" ><strong>{{errorTramite}}</strong></h4>
+                    </div>
+                </div>
+
+
+            </div>
+   <ng-container *ngIf="idTramite">
+       <div class="col-md-12">
+            <strong>Asignar etiquetas</strong><br><br>
+
+            <app-select-multiple optionsLabel="Etiquetas" placeholder="Seleccione una etiqueta" [etiqueta]="true"
+                                 [optionsList]="etiquetas"  [selectedList]="etiquetasAsignadas" >
+            </app-select-multiple>
+       </div>
+   </ng-container>
+
+            <div class="col-md-12">
+                <div class="buttons-content">
+
+
+                    <button type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button>
+                    <button type="submit" class="btn btn-success">
+                        <span *ngIf="!editMode">Crear</span>
+                        <span *ngIf="editMode">Guardar</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </form>
+</div>

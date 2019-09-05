@@ -1,0 +1,21 @@
+import { version } from './version';
+
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
+
+export const environment = {
+  production: false,
+  endpoint: {
+    // back office qa
+    Usuarios: 'https://qa-usuarios-turnos.argentina.gob.ar/',
+    SNC: 'http://qa-filas.argentina.gob.ar/', // filas
+    TOD: 'http://qa-tod-turnos.argentina.gob.ar/',
+    Carteleras: 'http://localhost:4210/',
+    // api qa
+    UsuariosAPI: 'http://qa-usuarios-turnos.argentina.gob.ar/',
+    SNTAPI: 'http://qa-turnos-api.argentina.gob.ar/'
+  },
+  version: version
+};

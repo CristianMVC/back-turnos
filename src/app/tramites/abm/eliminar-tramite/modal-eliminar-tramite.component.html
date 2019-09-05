@@ -1,0 +1,14 @@
+<app-modal [showCloseButton]="false" [closeOnBlur]="true">
+    <div class="app-modal-header">
+        <h4 class="modal-title">Eliminar trámite</h4>
+    </div>
+    <div class="app-modal-body">
+        <p>¿Estás seguro de eliminar el trámite:
+            <span *ngIf="tramite">{{ tramite.nombre }} ?</span>
+        </p>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-default" (click)="cancelar()">Salir</button>
+        <button type="button" class="btn btn-danger" (click)="eliminarTramite()">Eliminar trámite</button>
+    </div>
+</app-modal>

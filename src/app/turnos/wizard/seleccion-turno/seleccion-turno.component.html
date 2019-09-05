@@ -1,0 +1,71 @@
+<div class="panel-pane pane-imagen-destacada ">  
+  <app-jumbotron></app-jumbotron>
+</div>
+<div class="container">
+  <div class="main">
+
+    <section>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-1">
+          <form #formTurno="ngForm" (ngSubmit)="submitForm(formTurno)" novalidate>
+            <h2 class="h3 m-t-0">Solicitud de turno en línea</h2>
+            <small class="text-muted">Paso 1 de 2</small>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;">
+                <span class="sr-only">50% Completado</span>
+              </div>
+            </div>
+            <div class="panel panel-default datos-tramite">
+              <div class="panel-body">
+                <h3 class="h2"><i class="fa fa-map"></i> Elegí la ubicación</h3>    
+                <div class="form-group" [ngClass]="{'has-error': provincia.invalid && formSubmitted}">
+                  <label for="provincia">Seleccioná tu provincia:</label>
+                  <select class="form-control" name="provincia" required #provincia="ngModel"
+                    [compareWith]="equalsProvincias" [(ngModel)]="criterio.provincia" (change)="onProvinciaSelect()">
+                    <option value="" disabled selected>Seleccione opción</option>
+                    <option *ngFor="let p of provincias" [ngValue]="p">{{p.nombre}}</option>
+                  </select>
+                  <span *ngIf="provincia.invalid && formSubmitted" class="help-block"> Seleccione una provincia </span>
+                </div>              
+                <div class="form-group" [ngClass]="{'has-error': localidad.invalid && formSubmitted}">
+                  <label for="localidad">Seleccioná tu localidad más cercana:</label>
+                  <i *ngIf="isLoading()" class="fa fa-circle-o-notch fa-spin"></i>
+                  <select class="form-control" [disabled]="isLoading()" name="localidad" required  #localidad="ngModel"
+                    [compareWith]="equalsLocalidades" [(ngModel)]="criterio.localidad" (change)="onProvinciaLocalidadChange()">
+                    <option value="" disabled selected>Seleccione opción</option>
+                    <option *ngFor="let l of localidades" [ngValue]="l">{{l.nombre}}</option>
+                  </select>
+                  <span *ngIf="localidad.invalid && formSubmitted" class="help-block"> Seleccione una localidad </span>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="loadingPuntoAtencion.status()" class="loading">
+            <i class="fa fa-circle-o-notch fa-spin"></i>
+            <p>Cargando</p>
+          </div>
+
+          <app-puntos-atencion (puntoAtencionChangeEvent)="puntoAtencionChange($event)" (verFechasEvent)="verFechas($event)"></app-puntos-atencion>
+          <span *ngIf="showErrorPuntoAtencion()" class="has-error">
+            <span class="help-block"><i class="fa fa-arrow-up"></i> Elegí un punto de atención </span>
+          </span>
+
+          <app-dias-disponibles-turno (fechaTurnoChangeEvent)="fechaTurnoChange($event)" (verHorariosEvent)="verHorarios($event)"></app-dias-disponibles-turno>
+          <span *ngIf="showErrorFecha()" class="has-error">
+            <span class="help-block"><i class="fa fa-arrow-up"></i> Elegí una fecha </span>
+          </span>
+
+          <app-horarios-disponibles-turno (horarioTurnoChangeEvent)="horarioTurnoChange($event)"></app-horarios-disponibles-turno>
+          <span *ngIf="showErrorHora()" class="has-error">
+            <span class="help-block"><i class="fa fa-arrow-up"></i> Elegí un horario </span>
+          </span>
+
+          <div class="buttons-content">
+            <button type="submit" [disabled]="isDisabled()" class="btn btn-success pull-right">Continuar<span class="fa fa-arrow-right"></span></button>
+            <button type="button" class="btn btn-link pull-left" (click)="backStep()"><span class="fa fa-arrow-left"></span>Volver</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

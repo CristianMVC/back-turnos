@@ -1,0 +1,139 @@
+.section-header {
+    position: relative;
+    .buscar-turno {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+    h3 {
+        width: calc(100% - 245px)
+    }
+    @media (max-width: 768px) {
+        .buscar-turno {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        h3 {
+            width: 100%;
+        }
+    }
+}
+
+.steps {
+    margin-bottom: 40px;
+    .step > div:last-child {
+        padding-left: 0;
+    }
+}
+
+.input-container {
+    position: relative;
+    display: block!important;
+    height: 54px;
+    width: 100%;
+    .input-typeahead {
+        padding: 10px 16px;
+        font-size: 18px;
+        line-height: 1.3333333;
+    }
+}
+
+.results {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    text-align: left;
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    background-clip: padding-box;
+
+    ul>li {
+        line-height: 40px;
+        display: block;
+        padding: 3px 20px;
+        clear: both;
+        font-weight: 400;
+        line-height: 1.42857143;
+        color: #333;
+        font-size: 18px;
+
+        a {
+            color: black;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+}
+
+.suggestion {
+    line-height: 40px;
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: 400;
+    color: #333;
+    font-size: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    &:hover {
+        color: #fff;
+        text-decoration: none;
+        outline: 0;
+        background-color: #337ab7;
+        cursor: pointer;
+
+        a {
+            color: white !important;
+        }
+    }
+
+    .label {
+        display: inline-block; 
+        width:70px; 
+        margin-right:10px;
+    }
+
+    a {
+        color: black !important;
+        text-decoration: none !important;
+        opacity: 1 !important;
+        font-weight: normal !important;
+
+        
+    }
+}
+
+:host /deep/ .highlight {
+    background-color: #337ab7;
+    color: white;
+}
+
+.alert a:after {
+    content: " \f08e";
+    display: inline-block;
+    margin-left: 5px;
+    vertical-align: -1px;
+    font: normal normal normal 14px/1 FontAwesome;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+@media (max-width: 768px) {
+    .steps.steps-horizontal .step .line {
+        top: 25px;
+    }
+}

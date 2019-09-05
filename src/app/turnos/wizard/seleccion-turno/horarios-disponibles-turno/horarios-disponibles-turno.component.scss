@@ -1,0 +1,39 @@
+.grilla-horarios {
+	.item-horario {
+		width: 25%;
+		border: 1px solid #DDD;
+		float: left;
+	
+		label {
+			margin: 0;
+			padding: 15px;
+			cursor: pointer;
+			text-align: center;
+			width: 100%;
+		}
+		.selected {
+			background-color: #0695d6;
+			color: #fff;
+			&:hover {
+				color: #111!important;
+			}
+		}
+		&:hover label {
+			background-color: #d9edf7;
+		}
+	}
+}
+
+.disabled {
+    color: #ccc;
+}
+.panel-body {
+	h3 {
+		padding-bottom: 12px;
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 25px;
+		.fa {
+			margin-right: 8px;
+		}
+	}
+}

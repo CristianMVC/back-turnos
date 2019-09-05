@@ -1,0 +1,90 @@
+<div class="panel">
+    <app-alert></app-alert> 
+    <div class="alert alert-warning">
+     <div class="media">
+      <div class="media-left"><i class="fa fa-exclamation fa-fw fa-2x"></i></div>
+      <div class="media-body">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <p><strong>Importante:</strong> La edición de un rango horario impacta en la capacidad por grupo de trámites y en el manejo de sus intervalos de atención.</p>
+      </div>
+     </div>
+    </div>
+    <h1 class="h2" *ngIf="!editMode">Crear rango de horarios</h1>
+    <h1 class="h2" *ngIf="editMode">Editar rango de horarios</h1>
+    <hr>
+    <form [formGroup]="rangoForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="row">
+         <div class="col-md-3 col-feedback form-group has-feedback" [ngClass]="{'has-error': vmHoraInicio.isInvalid()}">
+            <label for="horaInicio"><strong>Desde *</strong></label>
+            <label class="hora">
+                <small>Hora</small>
+            </label>
+            <select class="form-control" formControlName="horaInicio" [compareWith]="equals"
+                [(ngModel)]="rango.horaInicio" (change)="onDesdeSelect()">
+                <option *ngFor="let h of optionsHora" [ngValue]="h">{{ h }} hs</option>
+            </select>
+            <app-validation-messages #vmHoraInicio></app-validation-messages>
+         </div>
+         <div class="col-md-3 col-feedback form-group has-feedback" [ngClass]="{'has-error': vmMinutosInicio.isInvalid()}">
+            <label for="minutosInicio" class="minutos">
+                <small>Minutos</small>
+            </label>
+            <select class="form-control" formControlName="minutosInicio" [compareWith]="equals"
+                [(ngModel)]="minutosInicio" (change)="onDesdeSelect()">
+                <option *ngFor="let m of optionsMinutos" [ngValue]="m">{{ m }} min</option>
+            </select>
+            <app-validation-messages #vmMinutosInicio></app-validation-messages>
+         </div>
+         <div class="col-md-3 col-feedback form-group has-feedback" [ngClass]="{'has-error': vmHoraFin.isInvalid()}">
+            <label for="horaFin"><strong>Hasta *</strong></label>
+            <label class="hora">
+                <small>Hora</small>
+            </label>
+            <select class="form-control" formControlName="horaFin" [compareWith]="equals"  
+                [(ngModel)]="rango.horaFin">
+                <option *ngFor="let h of optionsHoraHasta" [ngValue]="h">{{ h }} hs</option>
+            </select>
+            <app-validation-messages #vmHoraFin></app-validation-messages>
+         </div>
+         <div class="col-md-3 col-feedback form-group has-feedback" [ngClass]="{'has-error': vmMinutosFin.isInvalid()}">
+            <label class="minutos">
+                <small>Minutos</small>
+            </label>
+            <select class="form-control" formControlName="minutosFin" [compareWith]="equals"  
+                [(ngModel)]="minutosFin">
+                <option *ngFor="let m of optionsMinutos" [ngValue]="m">{{ m }} min</option>
+            </select>
+            <app-validation-messages #vmMinutosFin></app-validation-messages>
+         </div>
+        </div>
+        <div class="form-group has-feedback">
+            <label for="diasSemana"><strong>Días *</strong></label>
+            <div class="row">
+             <div class="col-md-3" *ngFor="let dia of optionsDias; let i = index">
+                <div class="checkbox">
+                 <label>
+                    <input type="checkbox" (change)="onDiaChecked(i+1)" [checked]="isChecked(i+1)"> {{ dia }}
+                 </label>
+                </div>
+             </div>
+            </div>
+            <input type="text" class="hidden" formControlName="diasSemana" [(ngModel)]="rango.diasSemana">
+            <app-validation-messages #vmDiasSemana></app-validation-messages>
+        </div>
+        <small class="aclaracion">(*) Campos obligatorios</small>
+
+        <div class="buttons-content">
+            <button class="btn btn-default" type="button" (click)="salir()">Cancelar</button>
+            <button class="btn btn-success" *ngIf="!editMode" type="submit">
+                <span>Crear</span>
+            </button>
+            <button class="btn btn-success" type="button" *ngIf="editMode" (click)="isDirtyForm() && modalModificarRango.show()">
+                <span>Guardar</span>
+            </button>
+        </div>
+    </form>
+
+    <app-modal-modificar-rango #modalModificarRango 
+        (updateRangoEvent)="onSubmit()">
+    </app-modal-modificar-rango>
+</div>

@@ -1,0 +1,30 @@
+<app-alert></app-alert>
+<div class="panel-header">
+    <h2>Horarios de atención</h2>    
+    <button type="button" class="btn btn-sm btn-success pull-right" (click)="crearRango()">
+        <i class="fa fa-plus"></i> Agregar rango de atención
+    </button>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Rango horario</th>
+            <th>Días</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rango of rangosPaginables.rangos">
+            <td>{{ rango.idRow }}</td>
+            <td>{{ rango.horaInicio }} - {{ rango.horaFin }}</td>
+            <td>{{ showDias(rango.diasSemana) }}</td>
+            <td class="acciones">
+                <button type="button" class="btn btn-primary btn-sm" (click)="editar(rango)">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="modalEliminar.show(rango, idPuntoAtencion)">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-modal-eliminar-rango #modalEliminar (rangoRemovedEvent)="rangoRemoved($event)">
+</app-modal-eliminar-rango>

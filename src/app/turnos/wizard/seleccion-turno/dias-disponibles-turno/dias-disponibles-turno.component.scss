@@ -1,0 +1,80 @@
+.input-group {
+	width: 100%;
+	margin-top: 20px;
+	.input-group-addon {
+		display: none;
+	}
+	.form-control {
+		margin-bottom: 20px;
+    display: none;
+	}
+}
+
+.panel-body h3 {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 25px;
+}
+
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table td.day {
+  height: 30px;
+  line-height: 30px;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 0;
+  &:hover{
+  	background-color: #d9edf7;
+  }
+  &.old {
+    visibility: hidden;
+  }
+  &.new {
+    visibility: hidden;
+  }
+}
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table td.active {
+  background-color: #0695d6;
+  color: #fff;
+  &:hover {
+    color: #111!important;
+  }
+}
+
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table  {
+  text-align: center;
+  width: 100%;
+  th {
+  	text-align: center;
+    text-transform: capitalize;
+  }
+}
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table th.prev:hover,
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table th.next:hover {
+  background-color: #eee;
+  color: #333;
+  cursor: pointer;
+}
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table .picker-switch {
+	cursor: pointer;
+}
+
+
+:host/deep/ .datepicker {
+  background-color: #fefefe!important;
+	padding: 25px 15px;
+	border: 1px solid #ddd;
+}
+
+:host/deep/ .bootstrap-datetimepicker-widget table td.day.disabled {
+  background: none;
+  color: #ccc;
+  cursor: not-allowed;
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+:host/deep/ .bootstrap-datetimepicker-widget table td.disabled.active {
+	background-color: #fff!important;
+	color: #f00;
+}

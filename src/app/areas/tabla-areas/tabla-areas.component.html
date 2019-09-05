@@ -1,0 +1,50 @@
+<app-alert></app-alert>
+<div class="section-title">
+    <h1 class="h3">{{organismo.nombre}} <small>({{organismo.abreviatura}})</small></h1>
+</div>
+
+
+<div class="section-acciones">
+    <button *appAuthRol="'organismos'" type="button" (click)="editarOrganismo()" class="btn btn-primary btn-sm">Editar</button>
+    <button *appAuthRol="'organismos'" type="button" (click)="modalEliminarOrganismo.show(organismo)" class="btn btn-danger btn-sm">Eliminar</button>
+</div>
+
+<div class="panel">
+    <div class="panel-header">
+        <h2>Áreas</h2>
+<div style="position: relative; padding-right:1%;">
+        <button *appAuthRol="'areas'" type="button" class="btn btn-sm btn-success pull-right"  (click)="crearTramite()" style="position:relative; left:1%;"><i class="fa fa-plus"></i> Crear tramite</button>
+        <button *appAuthRol="'areas'" type="button" class="btn btn-sm btn-success pull-right" (click)="crearArea()"><i class="fa fa-plus"></i> Crear area</button>
+</div>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Área</th>
+                <th>Abreviatura</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let area of areasPaginables.areas">
+                <td>{{ area.id }}</td>
+                <td><a (click)="verArea(area.id)">{{ area.nombre }}</a></td>
+                <td>{{ area.abreviatura }}</td>
+                <td class="acciones">
+                    <button *appAuthRol="'areas'" type="button" class="btn btn-primary btn-sm" (click)="editarArea(area)">editar</button>
+                    <button *appAuthRol="'areas'" type="button" class="btn btn-danger btn-sm" (click)="modalEliminarArea.show(idOrg, area)">eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        <app-pagination [itemsSize]="areasPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+    </div>
+</div>
+<app-modal-eliminar-area #modalEliminarArea
+    (areaRemovedEvent)="areaRemoved($event)">
+</app-modal-eliminar-area>
+<app-modal-eliminar-organismo #modalEliminarOrganismo
+    (organismoRemovedEvent)="organismoRemoved($event)">
+</app-modal-eliminar-organismo>

@@ -1,0 +1,14 @@
+<app-modal [showCloseButton]="false" [closeOnBlur]="true">
+    <div class="app-modal-header">
+        <h4 class="modal-title">Eliminar grupo de trámites</h4>
+    </div>
+    <div class="app-modal-body">
+        <p>¿Estás seguro de eliminar el grupo de trámites:
+            <span *ngIf="grupoTramites">{{ grupoTramites.nombre }} ?</span>
+        </p>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-default" (click)="cancelar()">Salir</button>
+        <button type="button" class="btn btn-danger" (click)="eliminar()">Eliminar grupo de trámites</button>
+    </div>
+</app-modal>

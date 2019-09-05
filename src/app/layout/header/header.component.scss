@@ -1,0 +1,69 @@
+#cd-login {
+  display: inline-block;
+}
+
+.jumbotron_bar {
+  background: rgba(153, 153, 153, 0.09);
+  color: #000;
+  font-size: 13px;
+  padding: 12px 0;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.logueado {
+  margin-top: 6px;
+}
+
+.jumbotron_bar .logueado .nom-logueado {
+  list-style-type: none;
+  margin: 0;
+  padding: 2px;
+  float: right;
+  position: relative;
+  text-transform: uppercase;
+}
+
+.nom-logueado .submenu {
+  background: #0695d6;
+}
+
+.nom-logueado .submenu li a {
+  padding: 6px 10px;
+  border-bottom: 0;
+  color: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.buscador-general {
+  overflow: hidden;
+
+  span {
+    display: block;
+  }
+
+  input {
+    padding: 5px;
+    border-radius: 4px;
+    outline: none;
+    border: 1px solid #ddd;
+    width: 300px;
+    float: left;
+  }
+
+  span.input-group-btn {
+    float: left;
+  }
+
+  .btn {
+    font-size: 12px;
+    padding: 5px 8px;
+    height: 28px;
+  }
+}
+
+.navbar-default .nav > li > a.active {
+    background: #0695d6;
+    color: #fff;
+}

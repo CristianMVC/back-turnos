@@ -1,0 +1,19 @@
+import { version } from './version';
+
+// The file contents for the current environment will overwrite these during build.
+// The build system defaults to the dev environment which uses `environment.ts`, but if you do
+// `ng build --env=prod` then `environment.prod.ts` will be used instead.
+// The list of which env maps to which file can be found in `.angular-cli.json`.
+
+export const environment = {
+  production: true,
+  endpoint: {
+      UsuariosAPI: 'http://snt-users-api.hexacta.com/api/v1.0/',
+      SNC: 'http://snc.hexacta.com/',
+      SNTAPI: 'http://sntapi.hexacta.com/api/v1.0/',
+      TOD: 'http://snt-tod.hexacta.com/',
+      Usuarios: 'http://snt-usuarios.hexacta.com/',
+      Carteleras: 'http://snc-carteleras-front.hexacta.com/'
+  },
+  version: version
+};

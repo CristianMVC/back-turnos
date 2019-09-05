@@ -1,0 +1,65 @@
+<div>
+    <div class="capacidad">
+        <h1 class="h2">Capacidad</h1>
+        <p class="descripcion">
+            Describe la cantidad de turnos que pueden otorgarse en el sitio web. La cantidad de turnos es por intervalo de atención y por cada rango horario.
+        </p>
+        <form [formGroup]="fd.form" autocomplete="off">
+          <div [class.hidden]="!overlappedRanges()" class="alert alert-danger">
+            <div class="media">
+                <div class="media-left"><i class="fa fa-exclamation fa-fw fa-2x"></i></div>
+                <div class="media-body">
+                    <p> Los rangos de horarios señalados se superponen. </p>
+                </div>
+            </div>
+          </div>
+          <table class="table table-striped tabla-capacidad">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Rango horario</th>
+                <th>Días</th>
+                <th>Turnos por intervalo</th>
+                <th>Total diario por rango</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let c of myCapacidad">
+                <td>
+                    <span [class.hidden]="!isRowOverlapped(c.idRow)" 
+                        class="text-danger fa fa-exclamation-circle"></span>
+                </td>
+                <td> {{ c.horaInicio }} - {{ c.horaFin }} </td>
+                <td> {{ showDias(c.diasSemana) }} </td>
+                <td>
+                    <input type="number" class="form-control"
+                        min="0"
+                        formControlName="{{ 'capacidad' + c.idRow }}" 
+                        [(ngModel)]="c.cantidadTurnos" 
+                        (change)="onTurnosChange()"
+                        [class.disabled]="overlappedRanges() && !isRowOverlapped(c.idRow)">
+                </td>
+                <td>{{ getTotalTurnos(c) }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+    </div>
+    <div class="totales">
+        <h1 class="h2">Turnos por día</h1>
+        <table class="table table-striped tabla-capacidad">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th *ngFor="let d of diasSemana" class="capitalize">{{ d }}</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="myCapacidad">
+                <tr>
+                    <td>Turnos</td>
+                    <td *ngFor="let t of totalesDia">{{ t }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

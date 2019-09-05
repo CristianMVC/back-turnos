@@ -1,0 +1,17 @@
+<ul class="pagination" *ngIf="paginationContext.hasResults()">
+  <li [class.disabled]="isTheFirstOne()">
+    <a href="" (click)="!isTheFirstOne() && selectPage(paginationContext.currentPage - 1, $event)"  aria-label="Previous">
+      <span aria-hidden="true">«</span>
+    </a>
+  </li>
+  <li *ngFor="let page of paginationContext.pages" [class.active]="isTheCurrentPage(page)">
+    <a href="" (click)="!isTheCurrentPage(page) && selectPage(page, $event)">
+      {{page}}
+    </a>
+  </li>
+  <li [class.disabled]="isTheLastOne()">
+    <a href="" (click)="!isTheLastOne() && selectPage(paginationContext.currentPage + 1, $event)"  aria-label="Next">
+      <span aria-hidden="true">»</span>
+    </a>
+  </li>
+</ul>

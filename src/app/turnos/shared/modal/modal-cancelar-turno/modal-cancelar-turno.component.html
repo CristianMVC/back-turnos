@@ -1,0 +1,12 @@
+<app-modal [showCloseButton]="false" [closeOnBlur]="true">
+    <div class="app-modal-header">
+        <h4 class="modal-title">Cancelar turno</h4>
+    </div>
+    <div class="app-modal-body">
+        <p>¿Estás seguro de cancelar este turno?</p>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-default" (click)="hide()">Salir</button>
+        <button type="button" class="btn btn-danger" (click)="cancelarTurno()">Cancelar turno</button>
+    </div>
+</app-modal>

@@ -1,0 +1,38 @@
+<app-alert></app-alert>
+<div class="panel-header">
+    <h2> Categorías de trámites </h2>    
+    <button type="button" class="btn btn-sm btn-success pull-right" (click)="crearCategoria()" [disabled]="!hayTramitesDisponibles()">
+        <i class="fa fa-plus"></i> crear categoría
+    </button>
+</div>
+<p class="descripcion"> Las categorías de trámites se visualizan en el sistema de Turnos on Demand (TOD) </p>
+<p class="descripcion text-danger" *ngIf="!hayTramitesDisponibles()">
+    <small>No hay trámites disponibles para crear una categoría. Creá un trámite nuevo o desvinculá alguno ya existente de otra categoría de trámites.</small>
+</p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre de la categoría</th>
+            <th>Cantidad de trámites</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let categoria of categoriasPaginables.categorias">
+            <td>{{ categoria.id }}</td>
+            <td>{{ categoria.nombre }}</td>
+            <td>{{ categoria.cantidadTramites }}</td>
+            <td class="acciones">
+                <button type="button" class="btn btn-primary btn-sm" (click)="editar(categoria)">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="modalEliminar.show(categoria, idPuntoAtencion)">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-modal-eliminar-categoria #modalEliminar 
+    (categoriaRemovedEvent)="categoriaRemoved($event)">
+</app-modal-eliminar-categoria>
+<div class="text-center">
+    <app-pagination [itemsSize]="categoriasPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+</div>

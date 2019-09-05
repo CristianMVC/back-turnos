@@ -1,0 +1,28 @@
+<div class="pane-content">
+  <section class="jumbotron {{jumbotronImg}}" aria-label="Cabecera" class="jumbotron jumbotron-img-tramite">
+    <div class="jumbotron_bar">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <ol class="breadcrumb pull-left">
+              <li *ngFor="let step of steps" [ngClass]="{'active': isFinalStep(step)}">
+                  <span>{{step}}</span>
+               </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="jumbotron_body">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h2 class="text-center">{{title}}</h2>
+            <p class="text-center">{{subtitle}}</p>
+          </div>
+        </div>        
+      </div>
+    </div>
+    <div class="overlay"></div>
+  </section>
+</div>

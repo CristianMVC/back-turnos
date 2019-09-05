@@ -1,0 +1,38 @@
+<div class="panel panel-default datos-tramite">
+    <div class="panel-body">
+        <h2><i class="fa fa-calendar-check-o" aria-hidden="true"></i> Estos son los datos de tu turno</h2>
+        <hr class="m-y-1">
+        <ul id="show-data-description-lugar">
+            <li>
+                <div class="form-group m-t-2">
+                    <label class="control-label">Código de reserva</label>
+                    <p>{{datosTurno.codigo | codigoReserva}}</p>
+                </div>
+                <div class="form-group m-t-2">
+                    <label class="control-label">Fecha</label>
+                    <p>{{datosTurno.fecha | fulldate}}</p>
+                </div>
+                <div class="form-group m-t-2">
+                    <label class="control-label">Horario</label>
+                    <p>{{datosTurno.hora | shortTime}} hs</p>
+                </div>
+                <div class="form-group m-t-2">
+                     <label class="control-label">Trámite</label>
+                    <p>{{datosTurno.nombreArea}} - {{datosTurno.tramite}}</p>
+                </div>
+                <div class="form-group m-t-2">
+                    <label class="control-label">Punto de atención</label>
+                    <p>{{datosTurno.puntoAtencion.nombre}}</p>
+                    <p>{{datosTurno.puntoAtencion.direccion}} - {{ datosTurno.puntoAtencion.localidad }} - {{ datosTurno.puntoAtencion.provincia}}</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="panel panel-default" *ngIf="requisitos && requisitos.length > 0">
+    <div class="panel-body">
+        <h2><i class="fa fa-file-text-o" aria-hidden="true"></i> Requisitos y documentación obligatoria a presentar</h2>
+        <hr class="m-y-1">
+      <div innerHTML="{{requisitos}}"></div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+.panel-body {
+	h3 {
+		padding-bottom: 12px;
+		border-bottom: 1px solid #ddd;
+		margin-bottom: 25px;
+		.fa {
+			margin-right: 8px;
+		}
+	}
+}
+.has-error {
+	.alert {
+		p {
+			margin-bottom: 0;
+		}
+	}
+	i {
+		margin-right: 8px;
+		margin-left: 20px;
+	}
+}

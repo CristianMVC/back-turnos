@@ -1,0 +1,14 @@
+<div id="horarios" *ngIf="hasHorarios()">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <h3 class="h2"><i class="fa fa-clock-o"></i> Elegí el horario para el {{ fechaTurno | fulldate }}</h3>
+            <div class="form-group grilla-horarios">
+                <div class="item-horario" *ngFor="let horario of horarios">
+                    <label [ngClass]="{'disabled': !horario.disponible, 'selected': isSelected(horario)}">
+                    <input name="horario" type="radio" [(ngModel)]="horarioSelected" [value]="horario" [disabled]="!horario.disponible" (ngModelChange)="emitHorarioTurnoChange()"> {{ horario.hora | shortTime }}
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

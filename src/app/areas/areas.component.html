@@ -1,0 +1,10 @@
+<div class="col-md-12">
+    <app-tabla-areas [areasPaginables]="areasPaginables"></app-tabla-areas>
+    <div class="panel">
+    <app-tabla-tramites-organismo [tramitesPaginables]="tramitesPaginables"  [categoriasPaginables] = "categoriasPaginables" ></app-tabla-tramites-organismo>
+    </div>
+    <button class="btn btn-link" (click)="cancelar()">
+        <i class="fa fa-arrow-left"></i> Volver
+    </button>
+</div>
+

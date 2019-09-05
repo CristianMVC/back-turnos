@@ -1,0 +1,30 @@
+<div class="panel panel-default" [class.hidden]="!hasPuntosAtencion()">
+	<div class="panel-body">
+		<h3 class="h2"><i class="fa fa-map-marker"></i> Elegí una sucursal u oficina</h3>
+		<div *ngIf="hasPuntosAtencion()" class="lista-puntos-atencion">
+			<table class="table table-hover">
+				<tbody class="list">
+					<tr [class.disabled]="!puntoAtencion.disponible" *ngFor="let puntoAtencion of puntosAtencion; let i = index" [ngClass]="{'selected': isSelected(puntoAtencion), 'info': isSelected(puntoAtencion)}">
+						<td class="text-center">
+							<input type="radio" id="puntoAtencion_{{i}}" name="puntoAtencion_{{i}}"
+								[(ngModel)]="puntoAtencionSelected" [value]="puntoAtencion"
+								(ngModelChange)="updatePunto()">
+						</td>
+						<td>
+							<label for="puntoAtencion_{{i}}">
+								<p class="punto-atencion-nombre">
+									{{puntoAtencion.nombre}}
+								</p>
+								<span class="punto-atencion-direccion">
+									{{puntoAtencion.direccion}} - {{puntoAtencion.localidad}} - {{puntoAtencion.provincia}}
+								</span>
+								<small *ngIf="!puntoAtencion.disponible">Sin turnos disponibles</small>
+							</label>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<button type="button" class="btn btn-primary" [ngClass]="{'state-loading': isLoading() }" [disabled]="isDisabled()" (click)="verFechas()">Ver fechas para este lugar</button>
+	</div>
+</div>

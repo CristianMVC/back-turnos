@@ -1,0 +1,20 @@
+<div class="panel-pane pane-imagen-destacada">
+    <app-jumbotron></app-jumbotron>
+</div>
+<div class="container">
+    <div class="main">
+        <section aria-label="No se ha podido reservar el turno">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-1">
+                    <p><i class="fa fa-times-circle fa-4x text-danger"></i></p>
+                    <h1 class="h2">Lo sentimos. El turno acaba de ser reservado por otra persona.</h1>
+                    <p *ngFor="let error of errorMessages">{{error}}</p>
+
+                    <div class="buttons-content">
+                        <button class="btn btn-primary pull-right" (click)="goToSeleccionTurno()">Sacar nuevo turno</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div class="formGroup">
+    <div class="row">
+        <div class="col-md-9 form-group has-feedback" [ngClass]="{'has-error': hasError()}">
+            <label for="options"><strong>{{ optionsLabel }} <span *ngIf="isRequired()">*</span></strong></label>
+            <select class="form-control" [compareWith]="equals" 
+                [(ngModel)]="selectedOption">
+                <option value="null">{{ placeholder }}</option>
+                <option *ngFor="let op of availableOptionsList" [ngValue]="op">{{ op.nombre }}</option>
+            </select>
+            <div class="validacion">
+                <span *ngIf="hasError()" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <div *ngIf="hasError()" role="alert" class="form-alert">Debes completar este campo</div>
+            </div>
+        </div>
+        
+        
+        <div class="col-md-3">
+            <button class="btn btn-primary btn-agregar" type="button" [disabled]="addBtnDisabled()" (click)="onAddClicked()"> Agregar </button>
+        </div>
+    </div>
+    <table class="table table-striped tramites-agregados">
+        <thead>
+            <tr>
+                <th *ngIf = etiqueta>Etiquetas agregadas</th>
+                <th *ngIf = !etiqueta>Trámites agregados al punto de atención</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let sel of selectedList">
+                <td class="item"> {{ sel.nombre }} </td>
+                <td class="acciones"><button class="btn btn-sm btn-danger" (click)="onRemoveClicked(sel)">Quitar</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,27 @@
+<div class="panel-pane pane-imagen-destacada">
+    <app-jumbotron></app-jumbotron>
+</div>
+
+<div class="container">
+    <div class="main">
+        <section>
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+                    <h1 class="h2">{{datosTurno.tramite}}</h1>
+                    <p>Aquí podes ver los datos y requisitos de tu turno. También podes cancelarlo.</p>
+                    
+                    <app-datos-turno [datosTurno]="datosTurno" [requisitos]="requisitos"></app-datos-turno>
+
+                    <div class="buttons-content">
+                        <div class="pull-right">
+                            <a href='javascript:window.print(); void 0;' class="btn btn-link">Imprimir</a>
+                            <button type="submit" class="btn btn-primary" [routerLink]="[ '/turnos' ]">Ir al inicio</button>
+                        </div>
+                        <button type="submit" class="btn btn-danger pull-left" (click)="modalCancelarTurno.show()">Cancelar turno</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <app-modal-cancelar-turno #modalCancelarTurno [codigo]="datosTurno.codigo"></app-modal-cancelar-turno>
+    </div>
+</div>

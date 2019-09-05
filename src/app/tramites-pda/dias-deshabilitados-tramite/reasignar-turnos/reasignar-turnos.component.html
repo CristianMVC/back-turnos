@@ -1,0 +1,47 @@
+<div class="panel viewport">
+  <app-alert></app-alert>
+  <h1 class="h2">Reasignación de los turnos del {{ fecha | fulldate }}</h1>
+  <h3 class="h5">A continuación se muestran los próximos 5 días hábiles. Ingresá la cantidad de turnos por día hasta completar el total de turnos a reasignar.</h3>
+  <div  class="panel-group" role="tablist" aria-multiselectable="true">
+    <div *ngFor="let grupoTramite of accordionGrupoTramite" class="panel panel-default panel-reasignacion" [class.dropup]="grupoTramite.isOpened">
+        <div class="panel-heading" role="tab" (click)="toggle(grupoTramite)" style="min-height: 0%">
+          <h4>
+              <a role="button" data-toggle="collapse" [attr.aria-expanded]="grupoTramite.isOpened">
+                      {{ grupoTramite.nombre }}
+              </a>
+              <div class="caret pull-right"></div>
+              <span class="pull-right">Cantidad de turnos a reasignar : {{ grupoTramite.totalTurnosAMostrar }}</span>
+          </h4>
+        </div>
+        <div *ngIf="grupoTramite.isOpened" class="panel-collapse collapse in" role="tabpanel" [attr.aria-labelledby]="grupoTramite.nombre">
+          <div class="panel-body">
+            <form [formGroup]="reasignarForm" autocomplete="off">
+              <table class="table table-striped tabla-reasignacion">
+                  <thead>
+                    <tr>
+                        <th>Próximos 5 días hábiles</th>
+                        <th class="text-center">Turnos disponibles</th>
+                        <th class="text-center">Capacidad de turnos</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let f of grupoTramite.fechasArray">
+                      <td>{{ getKey(f) | fulldate }}</td>
+                      <td class="text-center">{{ getValue(f) }}</td>
+                      <td class="text-center">
+                        <input appInputMax type="number" class="form-control"
+                            min="0"
+                            [max]="f.totalMaximo"
+                            formControlName="{{ 'fecha' + getKey(f) }}"
+                            [(ngModel)]="f.cantidadAReasignar"
+                            (ngModelChange)="updateReasignacion(grupoTramite)">
+                      </td>
+                    </tr>
+                  </tbody>
+              </table>
+            </form>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

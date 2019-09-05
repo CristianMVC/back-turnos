@@ -1,0 +1,61 @@
+<header>
+  <nav class="navbar navbar-top navbar-default" role="navigation">
+    <div class="container">
+        <div>
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/">
+              <img src="./assets/images/logo.svg" alt="Inicio" width="274" height="50" />
+              <h1 class="sr-only">Argentina.gob.ar <small>Presidencia de la Nación</small></h1>
+            </a>
+          </div>
+          <nav class="nav navbar-nav navbar-right">
+              <li><a *appAuthRol="'adminPda'" routerLink="/chooseNavigation" [class.active]="isAdministrarActive()">Administrar</a></li>
+              <li><a *appAuthRol="'myPda'" (click)="goToRecepcion()" routerLinkActive="active">Recepción</a></li>
+              <li><a *appAuthRol="'myPda'" (click)="goToColas()" routerLinkActive="active">Filas</a></li>
+              <li class="dropdown" routerLinkActive="active" *appAuthRol="'no_aux'" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" routerLinkActive="active">Usuarios <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a *appAuthRol="'usuarios'" (click)="goToUsuarios()">Listado de usuarios</a></li>
+                  <li><a *appAuthRol="'myPda'" (click)="goToAgentes()">Listado de agentes</a></li>
+                </ul>
+              </li>
+              <li><a *appAuthRol="'myPda'" (click)="goToVentanillas()" routerLinkActive="active">Ventanillas</a></li>
+              <!--li class="dropdown" routerLinkActive="active">
+                <a *appAuthRol="'myPda'" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" routerLinkActive="active">Carteleras <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a *appAuthRol="'myPda'" (click)="goToVerCarteleras()">Ver carteleras</a></li>
+                  <li><a *appAuthRol="'myPda'" (click)="goToCarteleras()">Administrar carteleras</a></li>
+                </ul>
+              </li-->
+              <li><a *appAuthRol="'calendario'" routerLink="/calendario" routerLinkActive="active">Calendario</a></li>
+              <li><a *appAuthRol="'tod'" (click)="goToTod()" routerLinkActive="active">TOD</a></li>
+              <li class="dropdown" routerLinkActive="active">
+                  <a *appAuthRol="'organismos'" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" routerLinkActive="active">Clasificación de Trámites<span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                      <li><a *appAuthRol="'organismos'" (click)="goToCategorias()">Categorías</a></li>
+                      <li><a *appAuthRol="'organismos'" (click)="goToEtiquetas()">Etiquetas</a></li>
+                  </ul>
+              </li>
+          </nav>
+      </div>
+    </div>
+
+  </nav>
+  <div class="jumbotron_bar">
+    <div class="container">
+      <div class="col-sm-12">
+        <div class="logueado">
+          <div class="nom-logueado">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">{{ nombreYApellido }}<b class="caret"></b></a>
+            <ul class="dropdown-menu submenu" role="menu">
+              <li><a (click)="goToCambiarPassword()">Modificar contraseña</a></li>
+              <li class="salir"><a (click)="logout()">Salir <i aria-hidden="true" class="fa fa-sign-out"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-alert></app-alert>
+</header>
+

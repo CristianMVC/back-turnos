@@ -1,0 +1,37 @@
+<app-alert></app-alert>
+<div class="section-title">
+    <ol class="breadcrumb">
+        <li *appAuthRol="'areas'">Organismo: <a href='javascript:void(0);' (click)="goToAreas()" >{{organismo.nombre}}</a></li>
+    </ol>
+    <h1 class="h3">{{area.nombre}} <small>({{area.abreviatura}})</small></h1>
+</div>
+<div class="section-acciones">
+    <button *appAuthRol="'areas'" type="button" (click)="editarArea()" class="btn btn-primary btn-sm">Editar</button>
+    <button *appAuthRol="'areas'" type="button" (click)="modalEliminarArea.show(idOrganismo, area)" class="btn btn-danger btn-sm">Eliminar</button>
+</div>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" *appAuthRol="'no_aux'">
+    <li role="presentation" [ngClass]="{'active': isTramiteTabActive()}">
+        <a href="#tramites" (click)="displayTramites()" aria-controls="profile" role="tab" data-toggle="tab">Trámites</a>
+    </li>
+    <li role="presentation" [ngClass]="{'active': !isTramiteTabActive()}">
+        <a href="#puntosAtencion" (click)="displayPuntosAtencion()" aria-controls="home" role="tab" data-toggle="tab">Puntos de atención</a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <router-outlet></router-outlet> <!-- Es necesario un outlet por defecto -->
+    <div role="tabpanel" class="tab-pane"  id="tramites">
+        <router-outlet name="tramitesOutlet"></router-outlet>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="puntosAtencion">
+        <router-outlet name="puntosAtencionOutlet"></router-outlet>
+    </div>
+</div>
+
+<app-modal-eliminar-area #modalEliminarArea
+(areaRemovedEvent)="areaRemoved($event)">
+</app-modal-eliminar-area>
+

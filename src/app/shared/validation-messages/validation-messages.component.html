@@ -1,0 +1,8 @@
+<span *ngIf="isInvalid()" class="glyphicon glyphicon-remove form-control-feedback"></span>
+<div *ngFor="let error of getKeyErrors()">
+    <div *ngIf="form.submitted && error == 'required'" role="alert" class="form-alert">Debes completar este campo</div>
+    <div *ngIf="form.submitted && (error == 'email')" role="alert" class="form-alert">El email ingresado no es válido</div>
+    <div *ngIf="form.submitted && (error == 'min' || error == 'max')" role="alert" class="form-alert">El valor ingresado no es válido</div>
+    <div *ngIf="form.submitted && error == 'pattern'" class="form-alert">El formato no es válido</div>
+    <div *ngIf="form.submitted && (error == 'mismatched')" role="alert" class="form-alert">Los valores ingresados no coinciden</div>
+</div>

@@ -1,0 +1,29 @@
+<div class="col-md-12">
+    <div class="section-title">
+        <h1 class="h3" *ngIf="!editMode">Crear organismo</h1>
+        <h1 class="h3" *ngIf="editMode">Editar organismo</h1>
+    </div>
+    <app-alert></app-alert>
+    <div class="panel p-x-3 p-y-2">
+        <form [formGroup]="agregarOrganismoForm" (ngSubmit)="onSubmit()" autocomplete="off">
+            <div class="form-group has-feedback" [ngClass]="{'has-error': vmNombre.isInvalid()}">
+                <label for="nombre"><strong>Nombre *</strong></label>
+                <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Ingresar nombre del organismo" [(ngModel)]="organismo.nombre">
+                <app-validation-messages #vmNombre ></app-validation-messages>
+            </div>
+            <div class="form-group has-feedback" [ngClass]="{'has-error': vmAbreviatura.isInvalid()}">
+                <label for="reserva"><strong>Abreviatura *</strong></label>
+                <input type="text" id="abreviatura" class="form-control" formControlName="abreviatura" placeholder="Ingresar la abreviatura del organismo" [(ngModel)]="organismo.abreviatura">
+                <app-validation-messages #vmAbreviatura></app-validation-messages>
+            </div>
+            <small class="aclaracion">(*) Campos obligatorios</small>
+            <div class="buttons-content">
+                <button  type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button>
+                <button type="submit" class="btn btn-success">
+                    <span *ngIf="!editMode">Crear</span>
+                    <span *ngIf="editMode">Guardar</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

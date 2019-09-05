@@ -1,0 +1,7 @@
+<div>
+    <ul>
+        <li *ngFor="let feriado of feriados">
+            <span class="feriado-dia">{{feriado | fulldate}}</span><button class="btn btn-success btn-xs pull-right" (click)="habilitarDia(feriado, idPuntoAtencion, idTramite)">Habilitar</button>
+        </li>
+    </ul>
+</div>

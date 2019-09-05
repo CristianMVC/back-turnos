@@ -1,0 +1,101 @@
+.input-group {
+	width: 100%;
+	margin-top: 20px;
+	.input-group-addon {
+		display: none;
+	}
+	.form-control {
+		margin-bottom: 20px;
+    display: none;
+	}
+}
+
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table td.day {
+  height: 30px;
+  line-height: 30px;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 0;
+  &:hover{
+    background-color: #d9edf7;
+  }
+  &.old {
+    visibility: hidden;
+  }
+  &.new {
+    visibility: hidden;
+  }
+}
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table td.active,
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table td.active:hover {
+  background-color: #0695d6;
+  color: #fff;
+  &.disabled {
+    background-color: #ddd !important;
+    color: black;
+    text-shadow: none !important;
+  }
+}
+
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table  {
+  text-align: center;
+  width: 100%;
+  th {
+    text-align: center;
+    text-transform: capitalize;
+  }
+}
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table th.prev:hover,
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table th.next:hover {
+  background-color: #eee;
+  color: #333;
+  cursor: pointer;
+}
+:host/deep/ .input-group .bootstrap-datetimepicker-widget table .picker-switch {
+  cursor: pointer;
+}
+
+
+:host/deep/ .datepicker {
+  background-color: #fefefe!important;
+  padding: 25px 15px;
+  border: 1px solid #ddd;
+}
+
+// :host/deep/ .bootstrap-datetimepicker-widget table td.day.disabled {
+//   background: none;
+//   color: #f00;
+//   font-weight: 500;
+//   cursor: not-allowed;
+//   &:hover {
+//     background-color: transparent;
+//   }
+// }
+
+:host/deep/ .bootstrap-datetimepicker-widget table td.day.disabled:hover {
+  background-color: #fff;
+}
+
+:host/deep/ .bootstrap-datetimepicker-widget table td.disabled.active {
+  background-color: #fff!important;
+  color: #f00;
+}
+
+:host/deep/ .lista-feriados {
+  ul {
+    height: 500px;
+    overflow-y: scroll;
+    padding-right: 10px;
+  }
+  h3 {
+    margin-top: 16px;
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+  .feriado-dia {
+    font-weight: 400;
+    &:first-letter {
+      text-transform: capitalize;
+    }
+  }
+}

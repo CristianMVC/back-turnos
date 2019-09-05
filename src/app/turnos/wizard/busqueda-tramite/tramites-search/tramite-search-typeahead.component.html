@@ -1,0 +1,68 @@
+<section>
+    <div class="container">
+        <app-alert></app-alert>
+        
+        <div class="row">
+            <div class="steps steps-horizontal col-md-12 text-center">
+                <div class="col-xs-4 col-sm-3 col-md-4 step">
+                    <div>
+                        <div class="circle bg-cielo">1</div>
+                        <div class="line">&nbsp;</div>
+                    </div>
+                    <div>
+                        <div class="description p-b-1">
+                            <h4 class="h5 m-t-0">Elegí un trámite</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-3 col-md-4 step">
+                    <div>
+                        <div class="circle bg-cielo">2</div>
+                        <div class="line">&nbsp;</div>
+                    </div>
+                    <div>
+                        <div class="description p-b-1">
+                            <h4 class="h5 m-t-0">Elegí un turno</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4 col-sm-3 col-md-4 step">
+                    <div>
+                        <div class="circle bg-cielo">3</div>
+                        <div class="line">&nbsp;</div>
+                    </div>
+                    <div>
+                        <div class="description p-b-1">
+                            <h4 class="h5 m-t-0">Completá tus datos</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="buscador">
+            
+            <div class="section-header">
+                <a class="btn btn-sm btn-success buscar-turno" [routerLink]="[ './busquedaTurno' ]"><i class="fa fa-calendar-check-o"></i> ¿Ya tenés turno asignado?</a>
+                <h3 class="m-t-0">Elección de trámite</h3>
+                <hr class="m-t-0">
+            </div>
+
+
+            <p>Elegí el trámite para el cual querés sacar un turno</p>
+            <!-- Se comenta buscador, ver PBI: 29057 -->
+            <form #searchForm="ngForm" novalidate (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input (keyup)="keywords$.next($event.target.value)" [(ngModel)]="searchText" class="form-control form-text tt-input input-typeahead"
+                            required name="searchValue" placeholder="Filtrar trámites por nombre, área u organismo" type="text"
+                            autocomplete="off">
+                        <span class="input-group-btn">
+                        <button class="btn-primary btn form-submit"><i class="fa fa-search"></i></button>
+                    </span>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>

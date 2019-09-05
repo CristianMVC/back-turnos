@@ -1,0 +1,14 @@
+<app-modal [showCloseButton]="true" [closeOnBlur]="true">
+    <div class="app-modal-header">
+        <h4 class="modal-title">Advertencia</h4>
+    </div>
+    <div class="app-modal-body">
+        <p class="descripcion">
+            Este rango horario va a modificar el intervalo de tiempo de tus grupos de trámite.
+        </p>
+    </div>
+    <div class="app-modal-footer">
+        <button type="button" class="btn btn-danger" (click)="cancelar()">Cancelar</button>
+        <button type="button" class="btn btn-success" (click)="modificar()">Aceptar</button>
+    </div>
+</app-modal>

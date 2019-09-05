@@ -1,0 +1,60 @@
+<div class="panel-header">
+    <app-alert></app-alert>
+    <h3>Trámites del organismo</h3>
+</div>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Nombre</th>
+        <th>Estado</th>
+        <th>Duración</th>
+        <th *appAuthRol="'tramites'">Categoría</th>
+        <th></th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngIf="tramitesPaginables.size <= 0">
+     <td> <p> No hay tramites </p> </td>
+     <td></td>
+        <td></td>
+            <td></td>
+    </tr>
+    <tr *ngFor="let tramite of tramitesPaginables.tramites">
+        <td>{{ tramite.id }}</td>
+        <td>{{ tramite.nombre }}</td>
+        <td>{{ tramite.estado }}</td>
+        <td>{{ tramite.duracion }} minutos</td>
+
+        <td *appAuthRol="'tramites'">
+
+
+            <select  style="border-radius: 8px; background-color:transparent" name="categorias"  (change)="modify($event.target.value, tramite.id)">
+
+                <option    value="" selected disabled hidden>Sin categoría</option>
+                <ng-container   *ngFor="let cat of categoriasPaginables.categorias" >
+                    <ng-container *ngFor="let tram of cat.tramites">
+                        <ng-container *ngIf="tram?.length > 0 ">
+                            <ng-container *ngFor="let t of tram">
+                                <option *ngIf="tramite.id == t.id " [value]="cat.id" selected disabled hidden>  {{cat.nombre}} </option>
+                            </ng-container>
+                        </ng-container>
+                        <option  [value]="cat.id"> {{cat.nombre}} </option>
+                    </ng-container>
+                </ng-container>
+
+            </select>
+        </td>
+        <td class="acciones">
+            <button *appAuthRol="'tramites'"  type="button" class="btn btn-primary btn-sm" (click)="editarTramite(tramite)">editar</button>
+            <button *appAuthRol="'tramites'" type="button" class="btn btn-danger btn-sm" (click)="modalEliminar.show(tramite)">eliminar</button>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="text-center">
+    <app-pagination [itemsSize]="tramitesPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+    <app-modal-eliminar-tramite #modalEliminar  (tramiteRemovedEvent)="tramiteRemoved($event)"></app-modal-eliminar-tramite>
+</div>

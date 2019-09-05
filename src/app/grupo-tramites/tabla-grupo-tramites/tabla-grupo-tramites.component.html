@@ -1,0 +1,39 @@
+<app-alert></app-alert>
+<div class="panel-header">
+    <h2>Grupos de trámites</h2>    
+    <button type="button" class="btn btn-sm btn-success pull-right" (click)="crearGrupoTramites()" [disabled]="!hayTramitesDisponibles()">
+        <i class="fa fa-plus"></i> crear grupo
+    </button>
+</div>
+<p class="descripcion">Esta sección te permite agrupar los tramites y definir la cantidad de turnos que atendes a la misma hora.</p>
+<p class="descripcion text-danger" *ngIf="!hayTramitesDisponibles()"><small>No hay trámites disponibles para crear un grupo. Creá un trámite nuevo o desvinculá alguno ya existente de otro
+grupo de trámites.</small></p>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre del grupo</th>
+            <th>Cant. trámites</th>
+            <th>Intervalo entre turnos</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let grupo of grupoTramitesPaginables.grupos">
+            <td>{{ grupo.id }}</td>
+            <td>{{ grupo.nombre }}</td>
+            <td>{{ grupo.cantidadTramites }}</td>
+            <td>{{ grupo.intervalo }} minutos</td>
+            <td class="acciones">
+                <button type="button" class="btn btn-primary btn-sm" (click)="editar(grupo)">Editar</button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="modalEliminar.show(grupo, idPuntoAtencion)">Eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-modal-eliminar-grupo-tramites #modalEliminar 
+    (grupoTramitesRemovedEvent)="grupoTramitesRemoved($event)">
+</app-modal-eliminar-grupo-tramites>
+<div class="text-center">
+    <app-pagination [itemsSize]="grupoTramitesPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+</div>

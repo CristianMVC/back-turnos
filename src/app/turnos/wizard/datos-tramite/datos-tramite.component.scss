@@ -1,0 +1,35 @@
+$alert: #BB4945;
+
+.datos-personales {
+	max-width:  800px;
+	padding: 0 20px;
+	margin: 0 auto;
+	small.aclaracion {
+		display: block;
+		margin: 10px 0;
+	}
+	form {
+		margin-top: 30px;
+	}	
+	.timer {
+		margin: 25px 0 5px 0;
+		font-weight: 600;
+		p {
+			font-weight: 500;
+			font-size: 17px;
+			position: relative;
+			top: 4px;
+		}
+	}
+	.recordatorio {
+		h5 {
+			margin-bottom: 20px
+		}
+		.radio {
+			margin-bottom: 15px
+		}
+	}
+	.panel {
+		margin-top: 20px;
+	}
+}

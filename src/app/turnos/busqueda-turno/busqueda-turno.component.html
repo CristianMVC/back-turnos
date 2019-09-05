@@ -1,0 +1,51 @@
+<div class="panel-pane pane-imagen-destacada">
+    <app-jumbotron></app-jumbotron>
+</div>
+
+<section class="container">
+    <div class="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+        <h1 class="h2">Buscá tu turno</h1>
+        <p>Por favor ingresá tu CUIL y el código de reserva de tu turno que te fue enviado por mail.</p>
+        <div class="well p-x-3 p-y-2">
+            <form [formGroup]="busquedaForm" (ngSubmit)="onSubmit()" autocomplete="off" *ngIf="!turnoNoEncontrado">
+                <div class="form-group has-feedback" [ngClass]="{'has-error': submitPressed && busquedaForm.controls['cuil'].invalid}">
+                    <label for="cuil"><strong>Documento *</strong></label>
+                    <input type="text" id="cuil" class="form-control" formControlName="cuil"
+                        placeholder="Ingresa tu CUIL o documento extranjero">
+                    <span *ngIf="submitPressed && busquedaForm.controls['cuil'].invalid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <div *ngIf="submitPressed && busquedaForm.controls['cuil'].hasError('required')" role="alert" class="form-alert">Debes completar este campo</div>
+                </div>
+                <div class="form-group has-feedback" [ngClass]="{'has-error': submitPressed && busquedaForm.controls['codigo'].invalid}">
+                    <label for="reserva"><strong>Código de reserva *</strong></label>
+                    <input type="text" id="reserva" class="form-control" formControlName="codigo" placeholder="Ingresar código">
+                    <span *ngIf="submitPressed && busquedaForm.controls['codigo'].invalid" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                    <div *ngIf="submitPressed && busquedaForm.controls['codigo'].hasError('required')" role="alert" class="form-alert">Debes completar este campo</div>
+                    <div *ngIf="submitPressed && busquedaForm.controls['codigo'].hasError('pattern')" role="alert" class="form-alert">El formato de código es de 8 caracteres alfanuméricos</div>
+                </div>
+                <div class="form-group m-b-0">
+                    <button class="btn btn-success" type="submit">Buscar</button>
+                </div>
+            </form>
+            <div *ngIf="turnoNoEncontrado">
+                <div class="panel-pane pane-block">
+                    <div class="margin-60">
+                        <div class="row panel-disabled">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="text-center">
+                                    <h1 class="text-success"><i class="fa fa-exclamation-circle text-warning fa-3x"></i></h1>
+                                    <p class="lead">Turno no encontrado</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <p class="m-t-3 m-b-1 text-center">
+                                <a href='javascript:void(0);' (click)="intentarNuevamente()">Intentar nuevamente</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn btn-link" [routerLink]="['../../']"><i class="fa fa-arrow-left"></i> Volver</button>
+    </div>
+</section>

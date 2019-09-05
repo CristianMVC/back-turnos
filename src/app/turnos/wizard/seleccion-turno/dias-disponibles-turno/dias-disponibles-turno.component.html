@@ -1,0 +1,14 @@
+<div class="panel panel-default" [class.hidden]="!visibility">
+    <div class="panel-body">
+        <h3 class="h2"><i class="fa fa-calendar"></i> Elegí una fecha para el turno</h3>
+        <div class="form-group">
+            <div class="input-group">
+                <input class="form-control" appSntDatePicker [disabled]="isDisabled()" [date]="criterio.fecha" (onChange)="dateChange($event)" [options]="datepickerOptions" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" [ngClass]="{'state-loading': isLoading() }" [disabled]="isDisabled()" (click)="verHorarios()">Ver horarios disponibles</button>
+    </div>
+</div>

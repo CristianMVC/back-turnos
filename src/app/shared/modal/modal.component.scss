@@ -1,0 +1,19 @@
+.modal {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.modal-dialog {
+    margin: 20% auto !important;
+    max-height: 400px;
+		overflow-y: scroll;
+}
+   
+.modal-header {
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+}
+
+.modal-footer {
+    text-align: left;
+}

@@ -1,0 +1,58 @@
+<div class="section-title">
+    <ol class="breadcrumb">
+        <li *appAuthRol="'pdas'">Área: <a href='javascript:void(0);' (click)="goToArea()">{{area.nombre}}</a></li>
+    </ol>
+    <h1 class="h3">{{puntoAtencion.nombre}}</h1>
+</div>
+<app-alert></app-alert>
+<div class="section-acciones">
+    <button *appAuthRol="'pdas'" type="button" (click)="editarPuntoAtencion()" class="btn btn-primary btn-sm">Editar</button>
+    <button *appAuthRol="'pdas'" type="button" (click)="modalEliminar.show(puntoAtencion)" class="btn btn-danger btn-sm">Eliminar</button>
+</div>
+
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" [ngClass]="{'active': isHorariosTabActive()}">
+        <a href="#rangos" (click)="displayRangos()" aria-controls="profile" role="tab" data-toggle="tab">
+            <small>Horarios</small></a>
+    </li>
+    <li role="presentation" [ngClass]="{'active': isTramiteTabActive()}">
+        <a href="#tramites" (click)="displayTramites()" aria-controls="profile" role="tab" data-toggle="tab">
+            <small>Trámites</small></a>
+    </li>
+    <li role="presentation" [ngClass]="{'active': isCategoriasTabActive()}">
+        <a href="#categorias" (click)="displayCategorias()" aria-controls="profile" role="tab" data-toggle="tab">
+            <small>Categorías (ToD)</small></a>
+    </li>
+    <li role="presentation" [ngClass]="{'active': isGruposTabActive()}">
+        <a href="#grupoTramites" (click)="displayGrupoTramites()" aria-controls="profile" role="tab" data-toggle="tab">
+            <small>Grupos de trámites</small></a>
+    </li>
+    <li role="presentation" [ngClass]="{'active': isDiasDeshabilitadosTabActive()}">
+        <a href="#diasDeshabilitados" (click)="displayDiasDeshabilitados()" aria-controls="profile" role="tab" data-toggle="tab">
+            <small>Días deshabilitados</small></a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <router-outlet></router-outlet> <!-- Es necesario un outlet por defecto -->
+    <div role="tabpanel" class="tab-panel" id="rangos">
+        <router-outlet name="rangosOutlet"></router-outlet>
+    </div>
+    <div role="tabpanel" class="tab-panel" id="tramites">
+        <router-outlet name="tramitesOutlet"></router-outlet>
+    </div>
+    <div role="tabpanel" class="tab-panel" id="categorias">
+        <router-outlet name="categoriasOutlet"></router-outlet>
+    </div>
+    <div role="tabpanel" class="tab-panel" id="grupoTramites">
+        <router-outlet name="grupoTramitesOutlet"></router-outlet>
+    </div>
+    <div role="tabpanel" class="tab-panel" id="diasDeshabilitados">
+        <router-outlet name="diasDeshabilitadosOutlet"></router-outlet>
+    </div>
+</div>
+
+<app-modal-eliminar-punto-atencion #modalEliminar (puntoAtencionRemovedEvent)="puntoAtencionRemoved($event)"></app-modal-eliminar-punto-atencion>
+<button class="btn btn-link" [ngClass]="{'hidden': hideBackButton() }" (click)="goToArea()"><i class="fa fa-arrow-left"></i> Volver</button>

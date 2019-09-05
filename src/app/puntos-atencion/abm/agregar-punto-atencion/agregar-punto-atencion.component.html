@@ -1,0 +1,76 @@
+<div class="panel">
+        <app-alert></app-alert>
+
+    <h1 class="h2" *ngIf="editMode">Editar punto de atención</h1>
+    <h1 class="h2" *ngIf="!editMode">Crear punto de atención</h1>
+    <form [formGroup]="agregarPuntoAtencionForm" (ngSubmit)="onSubmit()" autocomplete="off">
+        <div class="row">
+            <div class="col-md-6">
+             <div class="form-group has-feedback">
+                <label for="area"><strong>Área</strong></label>
+                <input type="text" id="area" class="form-control" formControlName="area" readonly [(ngModel)]="puntoAtencion.area.nombre">
+             </div>
+            </div>
+            <div class="col-md-6">
+             <div class="form-group has-feedback" [ngClass]="{'has-error': vmVisible.isInvalid()}">
+                <label for="visible"><strong>Visibilidad</strong></label>
+                <select class="form-control" formControlName="visible"
+                    [(ngModel)]="puntoAtencion.estado">
+                 <option [ngValue]="1"> Visible </option>
+                 <option [ngValue]="0"> No visible </option>
+                </select>
+                <app-validation-messages #vmVisible></app-validation-messages>
+             </div>
+            </div>
+        </div>
+        <div class="form-group has-feedback" [ngClass]="{'has-error': vmNombre.isInvalid()}">
+            <label for="nombre"><strong>Nombre *</strong></label>
+            <input type="text" id="nombre" class="form-control" formControlName="nombre" placeholder="Ingresar nombre de la sucursal" [(ngModel)]="puntoAtencion.nombre">
+            <app-validation-messages #vmNombre></app-validation-messages>
+        </div>
+        <div class="row">
+         <div class="col-md-6">
+            <div class="form-group has-feedback" [ngClass]="{'has-error': vmProvincia.isInvalid()}">
+            <label for="provincia"><strong>Provincia *</strong></label>
+                <select class="form-control" formControlName="provincia"
+                [compareWith]="equals" [(ngModel)]="puntoAtencion.provincia" (change)="onProvinciaChange()">
+                <option *ngFor="let p of provincias" [ngValue]="p">{{p.nombre}}</option>
+                </select>
+                <app-validation-messages #vmProvincia></app-validation-messages>
+            </div>
+         </div>
+         <div class="col-md-6">
+            <div class="form-group has-feedback" [ngClass]="{'has-error': vmLocalidad.isInvalid()}">
+                <label for="localidad"><strong>Localidad *</strong></label>
+                    <input (keyup)="keywords.next($event.target.value)" [(ngModel)]="searchText" class="form-control form-text tt-input input-typeahead"  (focus)="showResults()"
+                    required name="searchValue" placeholder="Filtrar localidades por nombre" type="text"
+                    autocomplete="off" formControlName="localidad">
+                    <div *ngIf="localidades" class="results" [class.hidden]="hidden">
+                        <div *ngFor="let l of localidades" class="suggestion" >
+                                <div [innerHTML]="l.nombre | highlight: searchText" (click)="asignarValor(l)"></div>
+                        </div>
+                    </div>
+                <app-validation-messages #vmLocalidad></app-validation-messages>
+            </div>
+         </div>
+        </div>
+        <div class="form-group has-feedback" [ngClass]="{'has-error': vmDireccion.isInvalid()}">
+            <label for="direccion"><strong>Dirección *</strong></label>
+            <input type="text" id="direccion" class="form-control" formControlName="direccion" [(ngModel)]="puntoAtencion.direccion">
+            <app-validation-messages #vmDireccion></app-validation-messages>
+        </div>
+
+        <app-select-multiple optionsLabel="Trámites" placeholder="Seleccione un trámite"
+           [optionsList]="tramitesArea" [selectedList]="tramitesPuntoAtencion">
+        </app-select-multiple>
+
+        <small class="aclaracion">(*) Campos obligatorios</small>
+        <div class="buttons-content">
+            <button type="button" class="btn btn-default" (click)="cancelar()">Cancelar</button>
+            <button type="submit" class="btn btn-success">
+                <span *ngIf="!editMode">Crear</span>
+                <span *ngIf="editMode">Guardar</span>
+            </button>
+        </div>
+    </form>
+</div>

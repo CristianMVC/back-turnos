@@ -1,0 +1,33 @@
+<app-alert></app-alert>
+<div class="panel-header">
+    <h2>Puntos de atención</h2>    
+    <button *appAuthRol="'pdas'" type="button" class="btn btn-sm btn-success pull-right" (click)="crearPuntoAtencion()">
+        <i class="fa fa-plus"></i> Crear punto
+    </button>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let punto of puntosAtencionPaginables.puntosAtencion">
+            <td>{{ punto.id }}</td>
+            <td>{{ punto.nombre }}</td>
+            <td>{{ punto.direccion }}</td>
+            <td class="acciones acciones_pda">
+                <button *appAuthRol="'adminPda'" type="button" class="btn btn-primary btn-sm" (click)="verPuntoAtencion(punto.id)">administrar</button>
+                <button *appAuthRol="'pdas'" type="button" class="btn btn-primary btn-sm" (click)="editarPuntoAtencion(punto)">editar</button>
+                <button *appAuthRol="'pdas'" type="button" class="btn btn-danger btn-sm" (click)="modalEliminar.show(punto)">eliminar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<app-modal-eliminar-punto-atencion #modalEliminar (puntoAtencionRemovedEvent)="puntoRemoved($event)"></app-modal-eliminar-punto-atencion>
+<div class="text-center">
+    <app-pagination [itemsSize]="puntosAtencionPaginables.size" [pageSize]="pageSize" (pageChange)="onPageChange($event)"></app-pagination>
+</div>
