@@ -37,7 +37,7 @@
     "eonasdan-bootstrap-datetimepicker": "4.17.47",
     "font-awesome": "4.7.0",
     "husky": "^0.14.3",
-    "jquery": "3.2.1",
+    "jquery": "3.5.0",
     "jw-bootstrap-switch-ng2": "1.0.8",
     "monet": "^0.8.10",
     "ramda": "0.24.1",
