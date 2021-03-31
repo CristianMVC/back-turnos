@@ -307,16 +307,16 @@ aproba@^1.0.3:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.1.2.tgz#45c6629094de4e96f693ef7eab74ae079c240fc1"
 
+ar-poncho@>=1.0.0:
+  version "2.0.115"
+  resolved "https://registry.yarnpkg.com/ar-poncho/-/ar-poncho-2.0.115.tgz#592cbb1e7ae3add708404e70f41c63e42656bc40"
+
 are-we-there-yet@~1.1.2:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/are-we-there-yet/-/are-we-there-yet-1.1.4.tgz#bb5dca382bb94f05e15194373d16fd3ba1ca110d"
   dependencies:
     delegates "^1.0.0"
     readable-stream "^2.0.6"
-
-argob-poncho@0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/argob-poncho/-/argob-poncho-0.3.3.tgz#722f0a7e3257ceaee1fc878a60216e6cda4e1e95"
 
 argparse@^1.0.7:
   version "1.0.9"
@@ -5260,8 +5260,8 @@ xtend@^4.0.0:
   resolved "https://registry.yarnpkg.com/xtend/-/xtend-4.0.1.tgz#a5c6d532be656e23db820efb943a1f04998d63af"
 
 y18n@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.1.tgz#6d15fba884c08679c0d77e88e7759e811e07fa41"
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/y18n/-/y18n-3.2.2.tgz#85c901bd6470ce71fc4bb723ad209b70f7f28696"
 
 yallist@^2.1.2:
   version "2.1.2"
