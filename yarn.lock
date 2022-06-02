@@ -92,11 +92,11 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/core@4.2.4":
-  version "4.2.4"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.2.4.tgz#e8df7a8dd5de5a327784dfc35b5da6344281cf1b"
+"@angular/core@11.0.5":
+  version "11.0.5"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-11.0.5.tgz#b8c448c3cd4f6dae7327cc1ba4ee2aa29c8dbc26"
   dependencies:
-    tslib "^1.7.1"
+    tslib "^2.0.0"
 
 "@angular/forms@4.2.4":
   version "4.2.4"
@@ -307,16 +307,16 @@ aproba@^1.0.3:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.1.2.tgz#45c6629094de4e96f693ef7eab74ae079c240fc1"
 
+ar-poncho@>=1.0.0:
+  version "2.0.222"
+  resolved "https://registry.yarnpkg.com/ar-poncho/-/ar-poncho-2.0.222.tgz#eaa5422b2d5f726e52b29ea6a5ac358a2ddcd207"
+
 are-we-there-yet@~1.1.2:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/are-we-there-yet/-/are-we-there-yet-1.1.4.tgz#bb5dca382bb94f05e15194373d16fd3ba1ca110d"
   dependencies:
     delegates "^1.0.0"
     readable-stream "^2.0.6"
-
-argob-poncho@0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/argob-poncho/-/argob-poncho-0.3.3.tgz#722f0a7e3257ceaee1fc878a60216e6cda4e1e95"
 
 argparse@^1.0.7:
   version "1.0.9"
@@ -4815,6 +4815,10 @@ tsickle@^0.21.0:
 tslib@^1.7.1:
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.7.1.tgz#bc8004164691923a79fe8378bbeb3da2017538ec"
+
+tslib@^2.0.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.4.0.tgz#7cecaa7f073ce680a05847aa77be941098f36dc3"
 
 tslint@5.4.3:
   version "5.4.3"
